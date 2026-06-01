@@ -73,13 +73,11 @@ function giveWhitelistedCommand(p) {
 }
 
 function wlGiveCommand(p) {
-  return removeWhitelistedCommand(p) + "
-" + giveTempBanCommand(p);
+  return removeWhitelistedCommand(p) + "\n" + giveTempBanCommand(p);
 }
 
 function wlRemoveCommand(p) {
-  return removeTempBanCommand(p) + "
-" + giveWhitelistedCommand(p);
+  return removeTempBanCommand(p) + "\n" + giveWhitelistedCommand(p);
 }
 
 function roleGiveCommand(p) {
