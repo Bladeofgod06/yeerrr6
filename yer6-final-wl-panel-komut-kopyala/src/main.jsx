@@ -500,16 +500,43 @@ function PlayerPanel({player,setPlayer,setPage,tickets,setTickets,apps,setApps,p
 
 
 function SafeAdminPanel({
- admin,setAdmin,setPage,players,admins,tickets,setTickets,apps,setApps,punishments,setPunishments,
+ admin,setAdmin,setPage,players,admins,setAdmins,tickets,setTickets,apps,setApps,punishments,setPunishments,
  announcements,setAnnouncements,wanted,setWanted,playerBadges,setPlayerBadges,logs,setLogs
 }) {
  const [active,setActive]=useState('Dashboard');
+ const [newAdmin,setNewAdmin]=useState({username:'',discordId:'',password:'123456',role:'Staff 1'});
  const [reply,setReply]=useState({});
  const [newAnn,setNewAnn]=useState({title:'',text:'',level:'Genel'});
  const [newWanted,setNewWanted]=useState({name:'',discordId:'',crime:'',reward:'',danger:'Orta',note:''});
  const [badgeTarget,setBadgeTarget]=useState({discordId:'',badgeId:'BADGE-1'});
  const upper=isUpperStaff(admin);
 
+ function addAdmin(){
+  if(!upper) return alert('Yetkili eklemek için üst yetkili gerekiyor.');
+  if(!newAdmin.username || !newAdmin.discordId || !newAdmin.password) return alert('Ad, Discord ID ve şifre gerekli.');
+  const exists=admins.some(a=>String(a.discordId)===String(newAdmin.discordId));
+  if(exists) return alert('Bu Discord ID zaten yetkili.');
+  const item={...newAdmin,level:rankLevel(newAdmin.role)};
+  setAdmins(p=>[...p,item]);
+  setLogs(p=>[now()+' - yetkili eklendi: '+item.username+' / '+item.role,...p]);
+  setNewAdmin({username:'',discordId:'',password:'123456',role:'Staff 1'});
+ }
+ function removeAdmin(discordId){
+  if(!upper) return alert('Yetkili almak için üst yetkili gerekiyor.');
+  if(String(discordId)===String(admin.discordId)) return alert('Kendi yetkini alamazsın.');
+  setAdmins(p=>p.filter(a=>String(a.discordId)!==String(discordId)));
+  setLogs(p=>[now()+' - yetkili alındı: '+discordId,...p]);
+ }
+ function changeAdminRole(discordId,role){
+  if(!upper) return alert('Rütbe değiştirmek için üst yetkili gerekiyor.');
+  setAdmins(p=>p.map(a=>String(a.discordId)===String(discordId)?{...a,role,level:rankLevel(role)}:a));
+  setLogs(p=>[now()+' - yetkili rütbe değişti: '+discordId+' / '+role,...p]);
+ }
+ function rankLevel(role){
+  const order=['Staff 1','Staff 2','Staff 3','Staff 4','Staff 5','Head Staff','Guide Staff','General Staff','Moderatör','Head Moderatör','Trial Admin','Senior Admin','General Admin','Head Admin','Trial Manager','Head of Management','Co-Founder','Founder'];
+  const i=order.indexOf(role);
+  return i===-1?1:i+1;
+ }
  function addAnn(){
   if(!upper) return alert('Bu işlem için üst yetkili gerekiyor.');
   if(!newAnn.title || !newAnn.text) return alert('Başlık ve duyuru metni gerekli.');
@@ -558,7 +585,7 @@ function SafeAdminPanel({
  }
 
  const s=calcLiveStats(players,admins,tickets,apps,punishments,announcements,wanted);
- const menu=['Dashboard','Duyuru Merkezi','Arananlar Sistemi','Ticket Sistemi','Rozet Sistemi','Ceza Kayıtları','Oyuncular','Başvurular','Loglar'];
+ const menu=['Dashboard','Yetkili Yönetimi','Duyuru Merkezi','Arananlar Sistemi','Ticket Sistemi','Rozet Sistemi','Ceza Kayıtları','Oyuncular','Başvurular','Loglar'];
 
  return <div className="adminLayout">
   <aside>
@@ -579,6 +606,9 @@ function SafeAdminPanel({
     </div>
     <Card className="panel"><h2>Canlı İstatistikler</h2><div className="liveStatsGrid"><div><b>{s.onlinePlayers}</b><span>Online</span></div><div><b>{s.totalAnnouncements}</b><span>Duyuru</span></div><div><b>{s.totalWanted}</b><span>Aranan</span></div><div><b>{s.openTickets}</b><span>Açık Ticket</span></div></div></Card>
    </div>}
+
+
+   {active==='Yetkili Yönetimi'&&<Card className="panel"><h2>Yetkili Yönetimi</h2>{!upper&&<p>Sadece üst yetkililer yetkili ekleyip alabilir.</p>}<div className="grid4"><Field value={newAdmin.username} onChange={v=>setNewAdmin({...newAdmin,username:v})} placeholder="Yetkili adı"/><Field value={newAdmin.discordId} onChange={v=>setNewAdmin({...newAdmin,discordId:v})} placeholder="Discord ID"/><Field value={newAdmin.password} onChange={v=>setNewAdmin({...newAdmin,password:v})} placeholder="Şifre"/><select className="field" value={newAdmin.role} onChange={e=>setNewAdmin({...newAdmin,role:e.target.value})}>{['Staff 1','Staff 2','Staff 3','Staff 4','Staff 5','Head Staff','Guide Staff','General Staff','Moderatör','Head Moderatör','Trial Admin','Senior Admin','General Admin','Head Admin','Trial Manager','Head of Management','Co-Founder','Founder'].map(r=><option key={r}>{r}</option>)}</select></div><Button disabled={!upper} onClick={addAdmin}>Yetkili Ekle</Button><h3>Mevcut Yetkililer</h3>{admins.map(a=><div className="row" key={a.discordId}><div><b>{a.username}</b><p>{a.discordId}</p><small>{a.role} • LVL {a.level||rankLevel(a.role)}</small></div><div className="actions"><select className="field miniSelect" value={a.role} disabled={!upper} onChange={e=>changeAdminRole(a.discordId,e.target.value)}>{['Staff 1','Staff 2','Staff 3','Staff 4','Staff 5','Head Staff','Guide Staff','General Staff','Moderatör','Head Moderatör','Trial Admin','Senior Admin','General Admin','Head Admin','Trial Manager','Head of Management','Co-Founder','Founder'].map(r=><option key={r}>{r}</option>)}</select><Button disabled={!upper} variant="ghost" onClick={()=>removeAdmin(a.discordId)}>Yetki Al</Button></div></div>)}</Card>}
 
    {active==='Duyuru Merkezi'&&<Card className="panel"><h2>Duyuru Merkezi</h2>{!upper&&<p>Sadece üst yetkililer duyuru ekleyip silebilir.</p>}<div className="grid3"><Field value={newAnn.title} onChange={v=>setNewAnn({...newAnn,title:v})} placeholder="Başlık"/><select className="field" value={newAnn.level} onChange={e=>setNewAnn({...newAnn,level:e.target.value})}><option>Genel</option><option>Önemli</option><option>Kritik</option></select><Button disabled={!upper} onClick={addAnn}>Duyuru Ekle</Button></div><TextArea value={newAnn.text} onChange={v=>setNewAnn({...newAnn,text:v})} placeholder="Duyuru metni"/>{announcements.map(a=><div className="row" key={a.id}><div><b>{a.title}</b><p>{a.level} • {a.by} • {a.createdAt}</p><small>{a.text}</small></div><Button disabled={!upper} variant="ghost" onClick={()=>delAnn(a.id)}>Sil</Button></div>)}</Card>}
 
@@ -652,7 +682,7 @@ function App(){
  if(page==='game')return <AppShell theme={theme} setTheme={setTheme} musicOn={musicOn} setMusicOn={setMusicOn}><GamePage setPage={setPage} openLogin={openLogin}/></AppShell>;
  if(page==='market')return <AppShell theme={theme} setTheme={setTheme} musicOn={musicOn} setMusicOn={setMusicOn}><MarketPage setPage={setPage} openLogin={openLogin} donate={donate}/></AppShell>;
  if(page==='login')return <AppShell theme={theme} setTheme={setTheme} musicOn={musicOn} setMusicOn={setMusicOn}><LoginPage setPage={setPage} mode={mode} setMode={setMode} auth={auth} setAuth={setAuth} loginAdmin={loginAdmin} loginPlayer={loginPlayer} registerPlayer={registerPlayer}/></AppShell>;
- if(page==='admin'&&admin)return <SafeAdminPanel admin={admin} setAdmin={setAdmin} setPage={setPage} players={players} admins={admins} tickets={tickets} setTickets={setTickets} apps={apps} setApps={setApps} punishments={punishments} setPunishments={setPunishments} announcements={announcements} setAnnouncements={setAnnouncements} wanted={wanted} setWanted={setWanted} playerBadges={playerBadges} setPlayerBadges={setPlayerBadges} logs={logs} setLogs={setLogs}/>;
+ if(page==='admin'&&admin)return <SafeAdminPanel admin={admin} setAdmin={setAdmin} setPage={setPage} players={players} admins={admins} setAdmins={setAdmins} tickets={tickets} setTickets={setTickets} apps={apps} setApps={setApps} punishments={punishments} setPunishments={setPunishments} announcements={announcements} setAnnouncements={setAnnouncements} wanted={wanted} setWanted={setWanted} playerBadges={playerBadges} setPlayerBadges={setPlayerBadges} logs={logs} setLogs={setLogs}/>;
  if(page==='player'&&player)return <AppShell theme={theme} setTheme={setTheme} musicOn={musicOn} setMusicOn={setMusicOn}><PlayerPanel player={player} setPlayer={setPlayer} setPage={setPage} tickets={tickets} setTickets={setTickets} apps={apps} setApps={setApps} punishments={punishments} setPunishments={setPunishments} playerBadges={playerBadges} setLogs={setLogs}/></AppShell>;
  return <AppShell theme={theme} setTheme={setTheme} musicOn={musicOn} setMusicOn={setMusicOn}><HomePage setPage={setPage} openLogin={openLogin} announcements={announcements} wanted={wanted}/></AppShell>
 }
