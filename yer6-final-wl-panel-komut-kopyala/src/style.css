@@ -154,3 +154,83 @@ footer .logoImageBtn img,
   .heroText h1{font-size:42px!important}
   .status{top:500px!important;right:auto!important;width:auto!important}
 }
+
+
+/* === SON DÜZEN: üst logo büyük, hero kırmızı logo küçük === */
+.logo.logoImageBtn{
+  width:260px!important;
+  height:94px!important;
+  justify-content:flex-start!important;
+}
+
+.logo.logoImageBtn img{
+  width:245px!important;
+  max-height:92px!important;
+  object-fit:contain!important;
+}
+
+.header{
+  height:112px!important;
+  padding:0 46px!important;
+}
+
+.header nav{
+  gap:42px!important;
+}
+
+.header nav button{
+  font-size:14px!important;
+}
+
+.hero{
+  height:880px!important;
+}
+
+.heroText{
+  left:92px!important;
+  top:205px!important;
+  width:min(650px,90vw)!important;
+}
+
+.heroBigLogo{
+  width:245px!important;
+  max-width:90%!important;
+  margin:0 0 24px 0!important;
+}
+
+.heroText h1{
+  font-size:66px!important;
+  line-height:1.03!important;
+}
+
+.heroText p{
+  font-size:19px!important;
+  max-width:590px!important;
+}
+
+.status{
+  top:245px!important;
+  right:72px!important;
+  width:390px!important;
+}
+
+footer .logoImageBtn,
+.adminLayout aside .logoImageBtn{
+  width:230px!important;
+  height:95px!important;
+}
+
+footer .logoImageBtn img,
+.adminLayout aside .logoImageBtn img{
+  width:220px!important;
+  max-height:90px!important;
+}
+
+@media(max-width:1000px){
+  .logo.logoImageBtn{width:170px!important;height:70px!important}
+  .logo.logoImageBtn img{width:160px!important;max-height:68px!important}
+  .header{height:88px!important;padding:0 18px!important}
+  .heroText{left:24px!important;top:150px!important}
+  .heroBigLogo{width:170px!important}
+  .heroText h1{font-size:42px!important}
+}
