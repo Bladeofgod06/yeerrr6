@@ -155,82 +155,35 @@ footer .logoImageBtn img,
   .status{top:500px!important;right:auto!important;width:auto!important}
 }
 
-
-/* === SON DÜZEN: üst logo büyük, hero kırmızı logo küçük === */
-.logo.logoImageBtn{
-  width:260px!important;
-  height:94px!important;
-  justify-content:flex-start!important;
-}
-
-.logo.logoImageBtn img{
-  width:245px!important;
-  max-height:92px!important;
-  object-fit:contain!important;
-}
-
-.header{
-  height:112px!important;
-  padding:0 46px!important;
-}
-
-.header nav{
-  gap:42px!important;
-}
-
-.header nav button{
-  font-size:14px!important;
-}
-
-.hero{
-  height:880px!important;
-}
-
-.heroText{
-  left:92px!important;
-  top:205px!important;
-  width:min(650px,90vw)!important;
-}
-
-.heroBigLogo{
-  width:245px!important;
-  max-width:90%!important;
-  margin:0 0 24px 0!important;
-}
-
-.heroText h1{
-  font-size:66px!important;
-  line-height:1.03!important;
-}
-
-.heroText p{
-  font-size:19px!important;
-  max-width:590px!important;
-}
-
-.status{
-  top:245px!important;
-  right:72px!important;
-  width:390px!important;
-}
-
-footer .logoImageBtn,
-.adminLayout aside .logoImageBtn{
-  width:230px!important;
-  height:95px!important;
-}
-
-footer .logoImageBtn img,
-.adminLayout aside .logoImageBtn img{
-  width:220px!important;
-  max-height:90px!important;
-}
-
-@media(max-width:1000px){
-  .logo.logoImageBtn{width:170px!important;height:70px!important}
-  .logo.logoImageBtn img{width:160px!important;max-height:68px!important}
-  .header{height:88px!important;padding:0 18px!important}
-  .heroText{left:24px!important;top:150px!important}
-  .heroBigLogo{width:170px!important}
-  .heroText h1{font-size:42px!important}
-}
+/* === EXTRA: Açılış animasyonu, tema, müzik, AI, sinematik === */
+:root{--accent:#ff1f31;--accent2:#a80714;--bg:#05070a}
+body.theme-blue{--accent:#38bdf8;--accent2:#075985;--bg:#020817}
+body.theme-black{--accent:#e5e7eb;--accent2:#52525b;--bg:#030303}
+body.theme-red{--accent:#ff1f31;--accent2:#a80714;--bg:#05070a}
+body{background:var(--bg)!important}
+.btn{background:linear-gradient(135deg,var(--accent),var(--accent2))!important}
+.header{border-bottom-color:color-mix(in srgb,var(--accent) 35%,transparent)!important}
+.header nav button:hover,.heroText h1 em,.commandPreview b,.rankCard b,.mini svg,.stat svg,.title span{color:var(--accent)!important}
+.badge{border-color:color-mix(in srgb,var(--accent) 25%,transparent)}
+.splashScreen{position:fixed;inset:0;background:radial-gradient(circle at center,color-mix(in srgb,var(--accent) 18%,transparent),#020305 55%);z-index:99999;display:grid;place-items:center;animation:splashOut .55s ease 2.15s forwards}
+.splashInner{text-align:center;animation:splashPop .9s ease}
+.splashInner .logoImageBtn{justify-content:center!important;margin:auto;width:260px!important;height:110px!important}
+.splashInner .logoImageBtn img{width:250px!important;max-height:105px!important}
+.splashInner h1{font-size:34px;letter-spacing:5px;margin:18px 0 6px}
+.splashInner p{color:#aaa}
+.loadingBar{width:310px;height:8px;background:rgba(255,255,255,.1);border-radius:999px;overflow:hidden;margin:22px auto}
+.loadingBar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),#fff);animation:loadBar 2s ease forwards}
+@keyframes loadBar{to{width:100%}}@keyframes splashPop{from{transform:scale(.85);opacity:0}to{transform:scale(1);opacity:1}}@keyframes splashOut{to{opacity:0;visibility:hidden}}
+.floatingControls{position:fixed;right:18px;bottom:20px;z-index:90;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;max-width:520px}
+.floatingControls button,.aiToggle{background:rgba(5,7,10,.82);color:white;border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:999px;padding:11px 14px;font-weight:900;display:flex;gap:7px;align-items:center;cursor:pointer;backdrop-filter:blur(12px);transition:.25s}
+.floatingControls button:hover,.floatingControls button.active,.aiToggle:hover{transform:translateY(-5px);background:linear-gradient(135deg,var(--accent),var(--accent2))}
+.aiBox{position:fixed;left:18px;bottom:20px;z-index:91}
+.aiPanel{width:min(390px,92vw);height:500px;background:rgba(7,10,14,.94);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:18px;box-shadow:0 30px 90px rgba(0,0,0,.45);overflow:hidden;display:flex;flex-direction:column}
+.aiHead{height:56px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:space-between;padding:0 16px}.aiHead b{display:flex;gap:8px;align-items:center}.aiHead button{background:transparent;border:0;color:white;cursor:pointer}
+.aiMessages{flex:1;overflow:auto;padding:16px;display:flex;flex-direction:column;gap:10px}.aiMessages p{margin:0;padding:11px 13px;border-radius:12px;line-height:1.45}.aiMessages .bot{background:rgba(255,255,255,.08);align-self:flex-start}.aiMessages .user{background:linear-gradient(135deg,var(--accent),var(--accent2));align-self:flex-end}
+.aiInput{display:flex;gap:8px;padding:12px;border-top:1px solid rgba(255,255,255,.08)}.aiInput input{flex:1;background:#090c10;border:1px solid rgba(255,255,255,.12);border-radius:10px;color:white;padding:12px;outline:0}.aiInput button{width:44px;border:0;border-radius:10px;background:var(--accent);color:white;cursor:pointer}
+.cinematicTag{position:absolute;left:72px;top:128px;z-index:3;color:#ddd;background:rgba(0,0,0,.42);border:1px solid color-mix(in srgb,var(--accent) 25%,transparent);border-radius:999px;padding:10px 14px;display:flex;align-items:center;gap:8px;font-weight:900;backdrop-filter:blur(12px)}
+.hero:after{content:'';position:absolute;inset:0;background:linear-gradient(115deg,transparent 0 25%,rgba(255,255,255,.035) 26%,transparent 32%);pointer-events:none;animation:cinemaSweep 5s infinite}
+@keyframes cinemaSweep{0%{transform:translateX(-70%)}70%,100%{transform:translateX(80%)}}
+.dashboardCustom{display:grid;gap:16px}.widgetSettings h2{display:flex;align-items:center;gap:8px}.widgetToggles{display:flex;gap:10px;flex-wrap:wrap}.widgetToggles button{background:#090c10;border:1px solid rgba(255,255,255,.12);color:white;border-radius:999px;padding:11px 14px;font-weight:900;display:flex;align-items:center;gap:7px;cursor:pointer}
+@media(max-width:1000px){.floatingControls{right:10px;left:10px;bottom:10px;justify-content:center}.floatingControls button{font-size:12px;padding:9px}.aiBox{left:10px;bottom:80px}.cinematicTag{left:22px;top:112px;font-size:12px}.heroText{top:160px!important}}
