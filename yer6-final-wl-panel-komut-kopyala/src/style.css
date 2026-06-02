@@ -99,3 +99,13 @@ footer .logoImageBtn img{
   .logoImageBtn img{width:120px;max-height:50px}
   .heroMiniLogo{width:145px}
 }
+
+/* Gömülü logo düzeltmesi */
+.logo.logoImageBtn{
+  font-size:0!important;
+  letter-spacing:0!important;
+  color:transparent!important;
+}
+.logo.logoImageBtn img{
+  display:block!important;
+}
