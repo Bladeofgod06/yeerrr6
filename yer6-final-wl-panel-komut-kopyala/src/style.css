@@ -241,3 +241,6 @@ body{background:var(--bg)!important}
 .actions .field{
   margin-bottom:0!important;
 }
+
+/* Son düzen: sinematik etiketi kaldırıldı */
+.cinematicTag{display:none!important}

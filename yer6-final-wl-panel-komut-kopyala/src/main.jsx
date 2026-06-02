@@ -189,7 +189,7 @@ function BackgroundMusic({musicOn}) {
   if(musicOn) audio.play().catch(()=>{});
   else audio.pause();
  },[musicOn]);
- return <audio id="yer6-bg-music" loop src="https://cdn.pixabay.com/audio/2022/03/15/audio_2b4c1f69f7.mp3"/>;
+ return <audio id="yer6-bg-music" loop src="/music/yer6-theme.mp3"/>;
 }
 
 function AiAssistant() {
@@ -248,7 +248,7 @@ function HomePage({setPage,openLogin,announcements=[],wanted=[]}) {
  return <div className="site"><Header setPage={setPage} openLogin={openLogin}/>
   <section className="hero">
    {photos.map((p,i)=><img className={`heroImg ${i===slide?'active':''}`} src={`/images/${p}`} key={p}/>)}<div className="heroDark"></div>
-   <div className="cinematicTag"><Film size={16}/> Sinematik Ana Sayfa • Şehir Görüntüleri • Operasyon Havası</div><div className="heroText"><img className="heroBigLogo" src={YER6_HERO_LOGO} alt="YER6"/><h1>Bir Şehrin<br/><em>Yeni Hikayesi Başlıyor!</em></h1><p>Gerçekçi rol ortamı, aktif sistemler ve profesyonel yönetim kadrosuyla benzersiz bir deneyime katıl.</p><div className="heroButtons"><Button onClick={()=>openLogin('register')}><UserPlus size={18}/> Hemen Katıl</Button><Button variant="ghost" onClick={()=>window.open('https://discord.gg/ysewESgQm','_blank')}>Discord'da Katıl</Button></div></div>
+   <div className="heroText"><img className="heroBigLogo" src={YER6_HERO_LOGO} alt="YER6"/><h1>Bir Şehrin<br/><em>Yeni Hikayesi Başlıyor!</em></h1><p>Gerçekçi rol ortamı, aktif sistemler ve profesyonel yönetim kadrosuyla benzersiz bir deneyime katıl.</p><div className="heroButtons"><Button onClick={()=>openLogin('register')}><UserPlus size={18}/> Hemen Katıl</Button><Button variant="ghost" onClick={()=>window.open('https://discord.gg/ysewESgQm','_blank')}>Discord'da Katıl</Button></div></div>
    <Card className="status"><div><b>Sunucu Durumu</b><span>Çevrimiçi</span></div><p>IP Adresi <b>connect.yer6rp.com</b></p><p>Oyuncular <b>182 / 500</b></p><p>Ping <b>21ms</b></p><Button className="full" onClick={()=>window.location.href='fivem://connect/185.34.101.48:30120'}>Sunucuya Katıl</Button></Card>
   </section>
   <section className="galleryRow">{gallery.map((g,i)=><Card className="photoCard" key={i}><img src={`/images/${g}`}/><h2>{['Şehirden Kareler','Devlet Birimleri','Sokak Hayatı'][i]}</h2></Card>)}</section>
@@ -266,7 +266,7 @@ function HomePage({setPage,openLogin,announcements=[],wanted=[]}) {
   <section className="homeInfoSections">
    <Card className="homeInfoCard"><Megaphone/><h2>Son Duyurular</h2>{announcements.slice(0,2).map(a=><p key={a.id}><b>{a.title}</b><br/><small>{a.text}</small></p>)}<Button variant="ghost" onClick={()=>setPage('announcements')}>Tüm Duyurular</Button></Card>
    <Card className="homeInfoCard"><Siren/><h2>Arananlar</h2>{wanted.slice(0,2).map(w=><p key={w.id}><b>{w.name}</b><br/><small>{w.crime}</small></p>)}<Button variant="ghost" onClick={()=>setPage('wanted')}>Listeyi Gör</Button></Card>
-   <Card className="homeInfoCard"><Award/><h2>Premium Site</h2><p>YER6 portalı; oyuncu paneli, ceza sistemi, destek, başvuru ve yönetim sistemiyle aktif.</p></Card>
+   <Card className="homeInfoCard"><Megaphone/><h2>Son Duyurular</h2>{announcements.slice(0,3).map(a=><p key={a.id}><b>{a.title}</b><br/><small>{a.text}</small></p>)}</Card>
   </section>
 
   <Footer setPage={setPage} openLogin={openLogin}/>
@@ -321,7 +321,7 @@ function WantedPage({setPage,openLogin,wanted}) {
  </main></div>
 }
 
-function CharactersPage({setPage,openLogin}) {
+function CharactersPage({setPage,openLogin,chars=[]}) {
  const [chars,setChars]=useState(()=>JSON.parse(localStorage.getItem('yer6_chars')||'[]')); const [f,setF]=useState({name:'',owner:'',story:''});
  useEffect(()=>localStorage.setItem('yer6_chars',JSON.stringify(chars)),[chars]);
  return <div className="inner"><Header setPage={setPage} openLogin={openLogin}/><main><Title k="KARAKTERLER" t="Karakterler" p="Oyuncular karakter ve hikaye ekleyebilir."/><Card className="form"><Field value={f.name} onChange={v=>setF({...f,name:v})} placeholder="Karakter adı"/><Field value={f.owner} onChange={v=>setF({...f,owner:v})} placeholder="Oyuncu adı"/><TextArea value={f.story} onChange={v=>setF({...f,story:v})} placeholder="Hikaye"/><Button onClick={()=>{if(!f.name||!f.owner)return alert('Alanları doldur');setChars(p=>[f,...p]);setF({name:'',owner:'',story:''})}}>Ekle</Button></Card><div className="cards">{chars.map((c,i)=><Card className="mini" key={i}><Users/><h2>{c.name}</h2><p>{c.owner}</p><small>{c.story}</small></Card>)}</div></main></div>
@@ -501,7 +501,7 @@ function PlayerPanel({player,setPlayer,setPage,tickets,setTickets,apps,setApps,p
 
 function SafeAdminPanel({
  admin,setAdmin,setPage,players,admins,setAdmins,tickets,setTickets,apps,setApps,punishments,setPunishments,
- announcements,setAnnouncements,wanted,setWanted,playerBadges,setPlayerBadges,logs,setLogs
+ announcements,setAnnouncements,wanted,setWanted,playerBadges,setPlayerBadges,chars,setChars,logs,setLogs
 }) {
  const [active,setActive]=useState('Dashboard');
  const [newAdmin,setNewAdmin]=useState({username:'',discordId:'',password:'123456',role:'Staff 1'});
@@ -536,6 +536,12 @@ function SafeAdminPanel({
   const order=['Staff 1','Staff 2','Staff 3','Staff 4','Staff 5','Head Staff','Guide Staff','General Staff','Moderatör','Head Moderatör','Trial Admin','Senior Admin','General Admin','Head Admin','Trial Manager','Head of Management','Co-Founder','Founder'];
   const i=order.indexOf(role);
   return i===-1?1:i+1;
+ }
+ function deleteCharacter(index){
+  if(!upper) return alert('Karakter silmek için üst yetkili gerekiyor.');
+  if(!confirm('Bu karakter silinsin mi?')) return;
+  setChars(p=>p.filter((_,i)=>i!==index));
+  setLogs(p=>[now()+' - karakter silindi',...p]);
  }
  function addAnn(){
   if(!upper) return alert('Bu işlem için üst yetkili gerekiyor.');
@@ -585,7 +591,7 @@ function SafeAdminPanel({
  }
 
  const s=calcLiveStats(players,admins,tickets,apps,punishments,announcements,wanted);
- const menu=['Dashboard','Yetkili Yönetimi','Duyuru Merkezi','Arananlar Sistemi','Ticket Sistemi','Rozet Sistemi','Ceza Kayıtları','Oyuncular','Başvurular','Loglar'];
+ const menu=['Dashboard','Yetkili Yönetimi','Duyuru Merkezi','Arananlar Sistemi','Ticket Sistemi','Rozet Sistemi','Karakterler','Ceza Kayıtları','Oyuncular','Başvurular','Loglar'];
 
  return <div className="adminLayout">
   <aside>
@@ -617,6 +623,9 @@ function SafeAdminPanel({
    {active==='Ticket Sistemi'&&<Card className="panel"><h2>Gerçek Ticket Sistemi</h2>{tickets.length===0&&<p>Ticket yok.</p>}{tickets.map(t=><div className="ticketAdmin" key={t.id}><div className="row"><div><b>{t.id} • {t.title}</b><p>{t.username} • {t.type} • {t.state} • {t.assigned}</p><small>{t.description}</small></div><Button variant="ghost" onClick={()=>closeTicket(t.id)}>Kapat</Button></div><div className="ticketMessages">{(t.messages||[]).map((m,i)=><p key={i} className={m.role==='Oyuncu'?'user':'staff'}><b>{m.by}</b> <small>{m.time}</small><br/>{m.text}</p>)}</div><div className="ticketReply"><input value={reply[t.id]||''} onChange={e=>setReply(p=>({...p,[t.id]:e.target.value}))} placeholder="Cevap yaz..."/><Button onClick={()=>sendReply(t.id)}>Cevapla</Button></div></div>)}</Card>}
 
    {active==='Rozet Sistemi'&&<Card className="panel"><h2>Başarı / Rozet Sistemi</h2><div className="grid3"><Field value={badgeTarget.discordId} onChange={v=>setBadgeTarget({...badgeTarget,discordId:v})} placeholder="Oyuncu Discord ID"/><select className="field" value={badgeTarget.badgeId} onChange={e=>setBadgeTarget({...badgeTarget,badgeId:e.target.value})}>{badgesDefault.map(b=><option value={b.id} key={b.id}>{b.icon} {b.name}</option>)}</select><Button onClick={giveBadge}>Rozet Ver</Button></div><div className="badgeCatalog">{badgesDefault.map(b=><span className={`profileBadge ${b.color}`} key={b.id}>{b.icon} {b.name}</span>)}</div>{Object.entries(playerBadges).map(([id,list])=><div className="row" key={id}><div><b>{id}</b><p>{list.map(b=>b.icon+' '+b.name).join(' • ')}</p></div><div className="actions">{list.map(b=><Button key={b.id} variant="ghost" onClick={()=>removeBadge(id,b.id)}>{b.name} Al</Button>)}</div></div>)}</Card>}
+
+
+   {active==='Karakterler'&&<Card className="panel"><h2>Karakter Yönetimi</h2>{!upper&&<p>Sadece üst yetkililer karakter silebilir.</p>}{(!chars||chars.length===0)&&<p>Karakter yok.</p>}{(chars||[]).map((c,i)=><div className="row" key={i}><div><b>{c.name}</b><p>{c.owner}</p><small>{c.story}</small></div><Button disabled={!upper} variant="ghost" onClick={()=>deleteCharacter(i)}><Trash2 size={16}/> Sil</Button></div>)}</Card>}
 
    {active==='Ceza Kayıtları'&&<Card className="panel"><h2>Ceza Kayıtları</h2>{punishments.length===0&&<p>Ceza kaydı yok.</p>}{punishments.map(p=><div className="row" key={p.id}><div><b>{p.targetName||p.targetId}</b><p>{p.rule} • {p.penalty} • {p.status}</p></div><Badge tone={p.status==='Aktif'?'bad':'good'}>{p.status}</Badge></div>)}</Card>}
 
@@ -665,8 +674,9 @@ function App(){
  const [announcements,setAnnouncements]=useState(()=>JSON.parse(localStorage.getItem('yer6_announcements_v11')||'null')||announcementsDefault);
  const [wanted,setWanted]=useState(()=>JSON.parse(localStorage.getItem('yer6_wanted_v11')||'null')||wantedDefault);
  const [playerBadges,setPlayerBadges]=useState(()=>JSON.parse(localStorage.getItem('yer6_player_badges_v12')||'null')||{});
+ const [chars,setChars]=useState(()=>JSON.parse(localStorage.getItem('yer6_characters_v13')||'null')||charsDefault);
  const [logs,setLogs]=useState(['Sistem hazır.']); const [admin,setAdmin]=useState(null); const [player,setPlayer]=useState(null); const [theme,setTheme]=useState(()=>localStorage.getItem('yer6_theme')||'red'); const [musicOn,setMusicOn]=useState(false);
- useEffect(()=>localStorage.setItem('yer6_admins_v10',JSON.stringify(admins)),[admins]); useEffect(()=>localStorage.setItem('yer6_players_v10',JSON.stringify(players)),[players]); useEffect(()=>localStorage.setItem('yer6_donate_v10',JSON.stringify(donate)),[donate]); useEffect(()=>localStorage.setItem('yer6_ranks_v10',JSON.stringify(staffRanks)),[staffRanks]); useEffect(()=>localStorage.setItem('yer6_staff_members_v10',JSON.stringify(staffMembers)),[staffMembers]); useEffect(()=>localStorage.setItem('yer6_tickets_v10',JSON.stringify(tickets)),[tickets]); useEffect(()=>localStorage.setItem('yer6_apps_v10',JSON.stringify(apps)),[apps]); useEffect(()=>localStorage.setItem('yer6_punishments_v10',JSON.stringify(punishments)),[punishments]); useEffect(()=>localStorage.setItem('yer6_announcements_v11',JSON.stringify(announcements)),[announcements]); useEffect(()=>localStorage.setItem('yer6_wanted_v11',JSON.stringify(wanted)),[wanted]); useEffect(()=>localStorage.setItem('yer6_player_badges_v12',JSON.stringify(playerBadges)),[playerBadges]); useEffect(()=>{localStorage.setItem('yer6_theme',theme);document.body.className='theme-'+theme},[theme]);
+ useEffect(()=>localStorage.setItem('yer6_admins_v10',JSON.stringify(admins)),[admins]); useEffect(()=>localStorage.setItem('yer6_players_v10',JSON.stringify(players)),[players]); useEffect(()=>localStorage.setItem('yer6_donate_v10',JSON.stringify(donate)),[donate]); useEffect(()=>localStorage.setItem('yer6_ranks_v10',JSON.stringify(staffRanks)),[staffRanks]); useEffect(()=>localStorage.setItem('yer6_staff_members_v10',JSON.stringify(staffMembers)),[staffMembers]); useEffect(()=>localStorage.setItem('yer6_tickets_v10',JSON.stringify(tickets)),[tickets]); useEffect(()=>localStorage.setItem('yer6_apps_v10',JSON.stringify(apps)),[apps]); useEffect(()=>localStorage.setItem('yer6_punishments_v10',JSON.stringify(punishments)),[punishments]); useEffect(()=>localStorage.setItem('yer6_announcements_v11',JSON.stringify(announcements)),[announcements]); useEffect(()=>localStorage.setItem('yer6_wanted_v11',JSON.stringify(wanted)),[wanted]); useEffect(()=>localStorage.setItem('yer6_player_badges_v12',JSON.stringify(playerBadges)),[playerBadges]); useEffect(()=>localStorage.setItem('yer6_characters_v13',JSON.stringify(chars)),[chars]); useEffect(()=>{localStorage.setItem('yer6_theme',theme);document.body.className='theme-'+theme},[theme]);
 
  function openLogin(m){setMode(m);setPage('login');setAuth({username:'',discordId:'',password:'',steam:''})}
  function loginAdmin(){const a=admins.find(x=>String(x.discordId).trim()===String(auth.discordId).trim()&&String(x.password).trim()===String(auth.password).trim());if(!a)return alert('Kullanıcı adı veya şifre yanlış.');setAdmin(a);setPage('admin');setLogs(p=>[now()+' - admin girişi: '+a.username,...p])}
@@ -678,11 +688,11 @@ function App(){
  if(page==='wanted')return <AppShell theme={theme} setTheme={setTheme} musicOn={musicOn} setMusicOn={setMusicOn}><WantedPage setPage={setPage} openLogin={openLogin} wanted={wanted}/></AppShell>;
  if(page==='rules')return <AppShell theme={theme} setTheme={setTheme} musicOn={musicOn} setMusicOn={setMusicOn}><RulesPage setPage={setPage} openLogin={openLogin}/></AppShell>;
  if(page==='staff')return <AppShell theme={theme} setTheme={setTheme} musicOn={musicOn} setMusicOn={setMusicOn}><StaffPage setPage={setPage} openLogin={openLogin} staffMembers={staffMembers}/></AppShell>;
- if(page==='characters')return <AppShell theme={theme} setTheme={setTheme} musicOn={musicOn} setMusicOn={setMusicOn}><CharactersPage setPage={setPage} openLogin={openLogin}/></AppShell>;
+ if(page==='characters')return <AppShell theme={theme} setTheme={setTheme} musicOn={musicOn} setMusicOn={setMusicOn}><CharactersPage setPage={setPage} openLogin={openLogin} chars={chars}/></AppShell>;
  if(page==='game')return <AppShell theme={theme} setTheme={setTheme} musicOn={musicOn} setMusicOn={setMusicOn}><GamePage setPage={setPage} openLogin={openLogin}/></AppShell>;
  if(page==='market')return <AppShell theme={theme} setTheme={setTheme} musicOn={musicOn} setMusicOn={setMusicOn}><MarketPage setPage={setPage} openLogin={openLogin} donate={donate}/></AppShell>;
  if(page==='login')return <AppShell theme={theme} setTheme={setTheme} musicOn={musicOn} setMusicOn={setMusicOn}><LoginPage setPage={setPage} mode={mode} setMode={setMode} auth={auth} setAuth={setAuth} loginAdmin={loginAdmin} loginPlayer={loginPlayer} registerPlayer={registerPlayer}/></AppShell>;
- if(page==='admin'&&admin)return <SafeAdminPanel admin={admin} setAdmin={setAdmin} setPage={setPage} players={players} admins={admins} setAdmins={setAdmins} tickets={tickets} setTickets={setTickets} apps={apps} setApps={setApps} punishments={punishments} setPunishments={setPunishments} announcements={announcements} setAnnouncements={setAnnouncements} wanted={wanted} setWanted={setWanted} playerBadges={playerBadges} setPlayerBadges={setPlayerBadges} logs={logs} setLogs={setLogs}/>;
+ if(page==='admin'&&admin)return <SafeAdminPanel admin={admin} setAdmin={setAdmin} setPage={setPage} players={players} admins={admins} setAdmins={setAdmins} tickets={tickets} setTickets={setTickets} apps={apps} setApps={setApps} punishments={punishments} setPunishments={setPunishments} announcements={announcements} setAnnouncements={setAnnouncements} wanted={wanted} setWanted={setWanted} playerBadges={playerBadges} setPlayerBadges={setPlayerBadges} chars={chars} setChars={setChars} logs={logs} setLogs={setLogs}/>;
  if(page==='player'&&player)return <AppShell theme={theme} setTheme={setTheme} musicOn={musicOn} setMusicOn={setMusicOn}><PlayerPanel player={player} setPlayer={setPlayer} setPage={setPage} tickets={tickets} setTickets={setTickets} apps={apps} setApps={setApps} punishments={punishments} setPunishments={setPunishments} playerBadges={playerBadges} setLogs={setLogs}/></AppShell>;
  return <AppShell theme={theme} setTheme={setTheme} musicOn={musicOn} setMusicOn={setMusicOn}><HomePage setPage={setPage} openLogin={openLogin} announcements={announcements} wanted={wanted}/></AppShell>
 }
