@@ -173,7 +173,7 @@ function SplashScreen({theme}) {
   <div className="splashInner">
    <Logo/>
    <h1>YER6 ROLEPLAY</h1>
-   <p>Şehir yükleniyor...</p>
+   <p>Site yükleniyor...</p>
    <div className="loadingBar"><span></span></div>
   </div>
  </div>
