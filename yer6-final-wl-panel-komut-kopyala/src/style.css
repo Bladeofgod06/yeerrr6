@@ -247,3 +247,271 @@ body{background:var(--bg)!important}
 
 /* kesin gizleme */
 .cinematicTag{display:none!important}
+
+
+/* =========================================================
+   YER6 FOUNDER RED + BLACK THEME
+   Tam kırmızı-siyah tema override
+   ========================================================= */
+
+:root{
+  --accent:#ff0000 !important;
+  --accent2:#7a0000 !important;
+  --bg:#000000 !important;
+  --card-bg:#080808 !important;
+  --panel-bg:#0b0b0b !important;
+  --red-border:rgba(255,0,0,.42) !important;
+  --red-soft:rgba(255,0,0,.18) !important;
+  --red-glow:rgba(255,0,0,.32) !important;
+}
+
+html,
+body,
+#root{
+  background:#000000 !important;
+  color:#ffffff !important;
+}
+
+/* Header */
+.header{
+  background:rgba(0,0,0,.96) !important;
+  border-bottom:2px solid rgba(255,0,0,.45) !important;
+  box-shadow:0 0 30px rgba(255,0,0,.14) !important;
+}
+
+.header nav button{
+  color:#ffffff !important;
+}
+
+.header nav button:hover{
+  color:#ff0000 !important;
+  text-shadow:0 0 14px rgba(255,0,0,.55) !important;
+}
+
+/* Logo glow */
+.logo img,
+.logo.logoImageBtn img,
+.heroBigLogo{
+  filter:
+    drop-shadow(0 0 12px rgba(255,0,0,.50))
+    drop-shadow(0 0 34px rgba(255,0,0,.28)) !important;
+}
+
+/* Ana arka planlar */
+.adminLayout,
+.inner,
+.loginPage,
+.heroDark{
+  background-color:#000000 !important;
+}
+
+.heroDark{
+  background:
+    radial-gradient(circle at 18% 28%, rgba(255,0,0,.22), transparent 24%),
+    radial-gradient(circle at 78% 35%, rgba(125,0,0,.18), transparent 28%),
+    linear-gradient(90deg,rgba(0,0,0,.96),rgba(0,0,0,.45),rgba(0,0,0,.92)),
+    linear-gradient(180deg,rgba(0,0,0,.08),#000 96%) !important;
+}
+
+/* Kartlar / paneller */
+.card,
+.panel,
+.rankCard,
+.mini,
+.form,
+.status,
+.photoCard,
+.noticeCard,
+.wantedCard,
+.staffCard,
+.footPanel,
+.loginCard,
+.modalCard,
+.stat{
+  background:rgba(8,8,8,.92) !important;
+  border:1px solid rgba(255,0,0,.34) !important;
+  box-shadow:
+    0 0 22px rgba(255,0,0,.12),
+    0 25px 70px rgba(0,0,0,.48) !important;
+}
+
+.card:hover,
+.panel:hover,
+.rankCard:hover,
+.mini:hover,
+.noticeCard:hover,
+.wantedCard:hover,
+.staffCard:hover,
+.stat:hover{
+  border-color:rgba(255,0,0,.65) !important;
+  box-shadow:
+    0 0 38px rgba(255,0,0,.22),
+    0 30px 80px rgba(0,0,0,.55) !important;
+}
+
+/* Butonlar */
+.btn{
+  background:linear-gradient(135deg,#ff0000,#7a0000) !important;
+  color:#ffffff !important;
+  border:1px solid rgba(255,0,0,.35) !important;
+}
+
+.btn:hover{
+  box-shadow:0 0 42px rgba(255,0,0,.42) !important;
+}
+
+.btn.ghost{
+  background:rgba(0,0,0,.55) !important;
+  border:1px solid rgba(255,0,0,.32) !important;
+}
+
+/* Yazı vurguları */
+.heroText h1 em,
+.heroText span,
+.title span,
+.title h1,
+.rankCard b,
+.mini svg,
+.stat svg,
+.game svg,
+.commandPreview b,
+.noticeCard svg,
+.wantedCard svg,
+.homeInfoCard svg,
+.panel h2 svg{
+  color:#ff0000 !important;
+}
+
+/* Formlar */
+.field,
+.textarea,
+.search,
+.ticketReply input,
+.aiInput input{
+  background:#080808 !important;
+  color:#ffffff !important;
+  border:1px solid rgba(255,0,0,.32) !important;
+}
+
+.field:focus,
+.textarea:focus,
+.search:focus-within,
+.ticketReply input:focus,
+.aiInput input:focus{
+  border-color:rgba(255,0,0,.75) !important;
+  box-shadow:0 0 18px rgba(255,0,0,.18) !important;
+}
+
+.field option{
+  background:#080808 !important;
+  color:white !important;
+}
+
+/* Admin panel */
+.adminLayout{
+  background:#000000 !important;
+}
+
+.adminLayout aside{
+  background:#050505 !important;
+  border-right:2px solid rgba(255,0,0,.35) !important;
+  box-shadow:10px 0 35px rgba(255,0,0,.08) !important;
+}
+
+.adminLayout aside button:not(.logo):not(.btn){
+  color:#dddddd !important;
+}
+
+.adminLayout aside button.active,
+.adminLayout aside button:hover:not(.logo):not(.btn){
+  background:linear-gradient(135deg,#ff0000,#7a0000) !important;
+  color:#ffffff !important;
+  box-shadow:0 0 22px rgba(255,0,0,.24) !important;
+}
+
+/* Satırlar */
+.row,
+.ticketAdmin,
+.ticketThread,
+.liveStatsGrid div,
+.liveHomeStats .card{
+  background:rgba(5,5,5,.82) !important;
+  border:1px solid rgba(255,0,0,.24) !important;
+}
+
+.row:hover,
+.ticketAdmin:hover,
+.ticketThread:hover{
+  border-color:rgba(255,0,0,.5) !important;
+}
+
+/* Badge renkleri kırmızı-siyah uyumlu */
+.badge{
+  background:#210000 !important;
+  color:#ffb3b3 !important;
+  border:1px solid rgba(255,0,0,.35) !important;
+}
+
+.badge.bad{
+  background:#7a0000 !important;
+  color:#ffffff !important;
+}
+
+.badge.good{
+  background:#250000 !important;
+  color:#ffb3b3 !important;
+}
+
+.badge.note{
+  background:#120000 !important;
+  color:#ffcccc !important;
+}
+
+/* Ticket mesajları */
+.ticketMessages p.staff,
+.aiMessages .user{
+  background:linear-gradient(135deg,#ff0000,#7a0000) !important;
+}
+
+/* Duyuru / Aranan */
+.wantedStamp{
+  background:linear-gradient(135deg,#ff0000,#650000) !important;
+  box-shadow:0 0 18px rgba(255,0,0,.32) !important;
+}
+
+.noticeCard:before,
+.wantedCard:before{
+  background:radial-gradient(circle at top right, rgba(255,0,0,.22), transparent 45%) !important;
+}
+
+/* Açılış ve floating kontroller */
+.splashScreen{
+  background:radial-gradient(circle at center, rgba(255,0,0,.18), #000 58%) !important;
+}
+
+.loadingBar span{
+  background:linear-gradient(90deg,#ff0000,#ffffff) !important;
+}
+
+.floatingControls button,
+.aiToggle{
+  background:rgba(0,0,0,.88) !important;
+  border:1px solid rgba(255,0,0,.42) !important;
+}
+
+.floatingControls button:hover,
+.floatingControls button.active,
+.aiToggle:hover{
+  background:linear-gradient(135deg,#ff0000,#7a0000) !important;
+}
+
+/* Footer */
+footer{
+  background:#000000 !important;
+  border-top:2px solid rgba(255,0,0,.25) !important;
+}
+
+/* Sinematik yazı kesin kapalı */
+.cinematicTag{
+  display:none !important;
+}
