@@ -47,65 +47,110 @@
   margin-top:10px;
 }
 
-/* YER6 yeni görsel logo */
-.logoImageBtn{
-  width:150px;
-  height:58px;
-  padding:0;
-  display:flex;
-  align-items:center;
-  justify-content:flex-start;
-  background:transparent!important;
-  border:0!important;
-  overflow:visible;
-}
-.logoImageBtn img{
-  width:150px;
-  max-height:58px;
-  object-fit:contain;
-  display:block;
-  filter:drop-shadow(0 0 12px rgba(240,20,39,.18));
-}
-.heroMiniLogo{
-  width:185px;
-  max-height:82px;
-  object-fit:contain;
-  display:block;
-  margin-bottom:18px;
-  filter:drop-shadow(0 0 18px rgba(240,20,39,.25));
-}
-.heroText>span{
-  display:none!important;
-}
-footer .logoImageBtn{
-  width:165px;
-  height:70px;
-}
-footer .logoImageBtn img{
-  width:165px;
-  max-height:70px;
-}
-.adminLayout aside .logoImageBtn{
-  width:180px;
-  height:78px;
-  justify-content:center;
-}
-.adminLayout aside .logoImageBtn img{
-  width:180px;
-  max-height:78px;
-}
-@media(max-width:1000px){
-  .logoImageBtn{width:120px;height:50px}
-  .logoImageBtn img{width:120px;max-height:50px}
-  .heroMiniLogo{width:145px}
-}
-
-/* Gömülü logo düzeltmesi */
+/* === YER6 görsel tasarım FIX: büyük hero logo + güçlü header === */
 .logo.logoImageBtn{
   font-size:0!important;
   letter-spacing:0!important;
   color:transparent!important;
+  width:185px!important;
+  height:68px!important;
+  padding:0!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  background:transparent!important;
+  border:0!important;
+  overflow:visible!important;
 }
 .logo.logoImageBtn img{
+  width:170px!important;
+  max-height:66px!important;
+  object-fit:contain!important;
   display:block!important;
+  filter:drop-shadow(0 0 16px rgba(240,20,39,.18))!important;
+}
+.header{
+  height:96px!important;
+  padding:0 42px!important;
+  background:rgba(2,3,6,.92)!important;
+}
+.header nav{
+  gap:34px!important;
+}
+.header nav button{
+  font-size:13px!important;
+}
+.hero{
+  height:860px!important;
+}
+.heroDark{
+  background:
+    radial-gradient(circle at 16% 32%, rgba(240,20,39,.18), transparent 22%),
+    radial-gradient(circle at 72% 34%, rgba(240,20,39,.12), transparent 24%),
+    linear-gradient(90deg,rgba(0,0,0,.95),rgba(0,0,0,.38),rgba(0,0,0,.88)),
+    linear-gradient(180deg,rgba(0,0,0,.08),#05070a 96%)!important;
+}
+.heroText{
+  left:72px!important;
+  top:165px!important;
+  width:min(620px,90vw)!important;
+}
+.heroText>span,
+.heroMiniLogo{
+  display:none!important;
+}
+.heroBigLogo{
+  width:420px!important;
+  max-width:92%!important;
+  height:auto!important;
+  object-fit:contain!important;
+  display:block!important;
+  margin:0 0 24px 0!important;
+  filter:
+    drop-shadow(0 0 18px rgba(240,20,39,.32))
+    drop-shadow(0 0 45px rgba(240,20,39,.14))!important;
+}
+.heroText h1{
+  font-size:64px!important;
+  line-height:1.05!important;
+  margin:0 0 22px!important;
+  letter-spacing:-1px!important;
+}
+.heroText h1 em{
+  color:#ff1f31!important;
+}
+.heroText p{
+  max-width:560px!important;
+  font-size:19px!important;
+}
+.status{
+  top:230px!important;
+  right:72px!important;
+  width:380px!important;
+  padding:30px!important;
+}
+.galleryRow{
+  margin-top:-35px!important;
+  position:relative!important;
+  z-index:4!important;
+}
+footer .logoImageBtn,
+.adminLayout aside .logoImageBtn{
+  width:190px!important;
+  height:80px!important;
+}
+footer .logoImageBtn img,
+.adminLayout aside .logoImageBtn img{
+  width:185px!important;
+  max-height:78px!important;
+}
+@media(max-width:1000px){
+  .header{height:82px!important;padding:0 18px!important}
+  .logo.logoImageBtn{width:140px!important;height:58px!important}
+  .logo.logoImageBtn img{width:135px!important}
+  .hero{height:820px!important}
+  .heroText{left:22px!important;top:130px!important}
+  .heroBigLogo{width:260px!important}
+  .heroText h1{font-size:42px!important}
+  .status{top:500px!important;right:auto!important;width:auto!important}
 }
