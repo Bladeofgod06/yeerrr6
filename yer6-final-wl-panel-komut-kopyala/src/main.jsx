@@ -73,11 +73,13 @@ function giveWhitelistedCommand(p) {
 }
 
 function wlGiveCommand(p) {
-  return removeWhitelistedCommand(p) + "\n" + giveTempBanCommand(p);
+  return removeWhitelistedCommand(p) + "
+" + giveTempBanCommand(p);
 }
 
 function wlRemoveCommand(p) {
-  return removeTempBanCommand(p) + "\n" + giveWhitelistedCommand(p);
+  return removeTempBanCommand(p) + "
+" + giveWhitelistedCommand(p);
 }
 
 function roleGiveCommand(p) {
@@ -104,7 +106,9 @@ function Card({children,className=''}) { return <div className={`card ${classNam
 function Field({value,onChange,placeholder,type='text'}) { return <input className="field" type={type} value={value} onChange={e=>onChange(e.target.value)} placeholder={placeholder}/> }
 function TextArea({value,onChange,placeholder}) { return <textarea className="textarea" value={value} onChange={e=>onChange(e.target.value)} placeholder={placeholder}/> }
 function Badge({children,tone='warn'}) { return <span className={`badge ${tone}`}>{children}</span> }
-function Logo() { return <button className="logo">YER<span>6</span><small>ROLEPLAY</small></button> }
+function Logo() {
+  return <button className="logo logoImageBtn"><img src="/images/yer6-logo-new.png" alt="YER6 Roleplay"/></button>
+}
 function Title({k,t,p}) { return <div className="title"><span>{k}</span><h1>{t}</h1><p>{p}</p></div> }
 
 function Header({setPage,openLogin}) {
@@ -120,7 +124,7 @@ function HomePage({setPage,openLogin}) {
  return <div className="site"><Header setPage={setPage} openLogin={openLogin}/>
   <section className="hero">
    {photos.map((p,i)=><img className={`heroImg ${i===slide?'active':''}`} src={`/images/${p}`} key={p}/>)}<div className="heroDark"></div>
-   <div className="heroText"><span>YER6 ROLEPLAY</span><h1>Bir Şehrin<br/><em>Yeni Hikayesi Başlıyor!</em></h1><p>Gerçekçi rol ortamı, aktif sistemler ve profesyonel yönetim kadrosuyla benzersiz bir deneyime katıl.</p><div className="heroButtons"><Button onClick={()=>openLogin('register')}><UserPlus size={18}/> Hemen Katıl</Button><Button variant="ghost" onClick={()=>window.open('https://discord.gg/ysewESgQm','_blank')}>Discord'da Katıl</Button></div></div>
+   <div className="heroText"><img className="heroMiniLogo" src="/images/yer6-logo-new.png" alt="YER6 Roleplay"/><h1>Bir Şehrin<br/><em>Yeni Hikayesi Başlıyor!</em></h1><p>Gerçekçi rol ortamı, aktif sistemler ve profesyonel yönetim kadrosuyla benzersiz bir deneyime katıl.</p><div className="heroButtons"><Button onClick={()=>openLogin('register')}><UserPlus size={18}/> Hemen Katıl</Button><Button variant="ghost" onClick={()=>window.open('https://discord.gg/ysewESgQm','_blank')}>Discord'da Katıl</Button></div></div>
    <Card className="status"><div><b>Sunucu Durumu</b><span>Çevrimiçi</span></div><p>IP Adresi <b>connect.yer6rp.com</b></p><p>Oyuncular <b>182 / 500</b></p><p>Ping <b>21ms</b></p><Button className="full" onClick={()=>window.location.href='fivem://connect/185.34.101.48:30120'}>Sunucuya Katıl</Button></Card>
   </section>
   <section className="galleryRow">{gallery.map((g,i)=><Card className="photoCard" key={i}><img src={`/images/${g}`}/><h2>{['Şehirden Kareler','Devlet Birimleri','Sokak Hayatı'][i]}</h2></Card>)}</section>
@@ -240,12 +244,7 @@ function AdminPanel({admin,setAdmin,setPage,admins,setAdmins,players,setPlayers,
   <Button variant="ghost" onClick={()=>copyText(giveWhitelistedCommand(p))}>4. Whitelisted Ver</Button>
   <Button onClick={()=>finishPunishment(p.id)}><CheckCircle size={16}/> Panelde Bitir</Button>
 </div></div>)}</Card>}
-  {active==='Ceza Kayıtları'&&<Card className="panel"><h2>Ceza Kayıtları</h2>{punishments.length===0&&<p>Ceza kaydı yok.</p>}{punishments.map(p=><div className="row" key={p.id}><div><b>{p.id} • {p.targetType} • {p.targetId}</b><p>{p.rule} • {p.penalty} • {p.status}</p><small>Yetkili: {p.by} • {p.createdAt}</small><div className="miniCommand">{removeWhitelistedCommand(p)}<br/>{giveTempBanCommand(p)}</div></div><div className="actions">
-  <Button variant="ghost" onClick={()=>copyText(removeWhitelistedCommand(p))}>1. Whitelisted Al</Button>
-  <Button variant="ghost" onClick={()=>copyText(giveTempBanCommand(p))}>2. Uzaklaştırma Ver</Button>
-  <Button variant="ghost" onClick={()=>copyText(removeTempBanCommand(p))}>3. Uzaklaştırma Al</Button>
-  <Button variant="ghost" onClick={()=>copyText(giveWhitelistedCommand(p))}>4. Whitelisted Ver</Button>
-</div></div>)}</Card>}
+  {active==='Ceza Kayıtları'&&<Card className="panel"><h2>Ceza Kayıtları</h2>{punishments.length===0&&<p>Ceza kaydı yok.</p>}{punishments.map(p=><div className="row" key={p.id}><div><b>{p.id} • {p.targetType} • {p.targetId}</b><p>{p.rule} • {p.penalty} • {p.status}</p><small>Yetkili: {p.by} • {p.createdAt}</small><div className="miniCommand">{removeWhitelistedCommand(p)}<br/>{giveTempBanCommand(p)}</div></div><div className="actions"><Button variant="ghost" onClick={()=>copyText(removeWhitelistedCommand(p))}>1. Whitelisted Al</Button><Button variant="ghost" onClick={()=>copyText(giveTempBanCommand(p))}>2. Uzaklaştırma Ver</Button><Button variant="ghost" onClick={()=>copyText(removeTempBanCommand(p))}>3. Uzaklaştırma Al</Button><Button variant="ghost" onClick={()=>copyText(giveWhitelistedCommand(p))}>4. Whitelisted Ver</Button></div></div>)}</Card>}
   {active==='Kurallar'&&<Card className="panel"><h2>Kurallar</h2>{rules.map(r=><div className="rule" key={r.id}><span>{r.id}</span><b>{r.name}</b><em>{r.category}</em><Badge tone={r.level==='Perma'?'bad':r.level==='Not'?'note':'warn'}>{r.penalty}</Badge></div>)}</Card>}
   {active==='Donate Market'&&<Card className="panel"><h2>Donate Yönetimi</h2>{donate.map(d=><div className="row" key={d.type}><div><b>{d.type}</b><p>{d.items.join(' • ')}</p></div><Button onClick={()=>setEditDonate({...d})}>Düzenle</Button></div>)}</Card>}
   {active==='Loglar'&&<Card className="panel"><h2>Loglar</h2>{logs.map((l,i)=><div className="log" key={i}>{l}</div>)}</Card>}

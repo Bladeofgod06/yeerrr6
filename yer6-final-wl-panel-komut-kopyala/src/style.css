@@ -46,3 +46,56 @@
   word-break:break-all;
   margin-top:10px;
 }
+
+/* YER6 yeni görsel logo */
+.logoImageBtn{
+  width:150px;
+  height:58px;
+  padding:0;
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  background:transparent!important;
+  border:0!important;
+  overflow:visible;
+}
+.logoImageBtn img{
+  width:150px;
+  max-height:58px;
+  object-fit:contain;
+  display:block;
+  filter:drop-shadow(0 0 12px rgba(240,20,39,.18));
+}
+.heroMiniLogo{
+  width:185px;
+  max-height:82px;
+  object-fit:contain;
+  display:block;
+  margin-bottom:18px;
+  filter:drop-shadow(0 0 18px rgba(240,20,39,.25));
+}
+.heroText>span{
+  display:none!important;
+}
+footer .logoImageBtn{
+  width:165px;
+  height:70px;
+}
+footer .logoImageBtn img{
+  width:165px;
+  max-height:70px;
+}
+.adminLayout aside .logoImageBtn{
+  width:180px;
+  height:78px;
+  justify-content:center;
+}
+.adminLayout aside .logoImageBtn img{
+  width:180px;
+  max-height:78px;
+}
+@media(max-width:1000px){
+  .logoImageBtn{width:120px;height:50px}
+  .logoImageBtn img{width:120px;max-height:50px}
+  .heroMiniLogo{width:145px}
+}
