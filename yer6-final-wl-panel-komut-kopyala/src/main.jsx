@@ -43,6 +43,13 @@ const wantedDefault = [
 ];
 
 
+
+const charsDefault = [
+  { name:'Arda Eker', owner:'Yer6 Oyuncusu', story:'Şehirde yeni bir hayat kurmak için gelen karakter.' },
+  { name:'Kerem Aladağ', owner:'Yer6 Oyuncusu', story:'Adalet ve düzen tarafında hikaye oluşturan karakter.' },
+  { name:'Can Kartal', owner:'Yer6 Oyuncusu', story:'Şehirde güçlü bağlantıları olan bir karakter.' }
+];
+
 const badgesDefault = [
   { id:'BADGE-1', name:'Veteran Oyuncu', icon:'🏅', color:'gold' },
   { id:'BADGE-2', name:'Yetkili', icon:'🛡️', color:'red' },
@@ -321,10 +328,26 @@ function WantedPage({setPage,openLogin,wanted}) {
  </main></div>
 }
 
-function CharactersPage({setPage,openLogin,chars=[]}) {
- const [chars,setChars]=useState(()=>JSON.parse(localStorage.getItem('yer6_chars')||'[]')); const [f,setF]=useState({name:'',owner:'',story:''});
- useEffect(()=>localStorage.setItem('yer6_chars',JSON.stringify(chars)),[chars]);
- return <div className="inner"><Header setPage={setPage} openLogin={openLogin}/><main><Title k="KARAKTERLER" t="Karakterler" p="Oyuncular karakter ve hikaye ekleyebilir."/><Card className="form"><Field value={f.name} onChange={v=>setF({...f,name:v})} placeholder="Karakter adı"/><Field value={f.owner} onChange={v=>setF({...f,owner:v})} placeholder="Oyuncu adı"/><TextArea value={f.story} onChange={v=>setF({...f,story:v})} placeholder="Hikaye"/><Button onClick={()=>{if(!f.name||!f.owner)return alert('Alanları doldur');setChars(p=>[f,...p]);setF({name:'',owner:'',story:''})}}>Ekle</Button></Card><div className="cards">{chars.map((c,i)=><Card className="mini" key={i}><Users/><h2>{c.name}</h2><p>{c.owner}</p><small>{c.story}</small></Card>)}</div></main></div>
+function CharactersPage({setPage,openLogin,chars=[],setChars}) {
+ const [f,setF]=useState({name:'',owner:'',story:''});
+ function addChar(){
+  if(!f.name||!f.owner) return alert('Karakter adı ve oyuncu adı gerekli.');
+  if(typeof setChars !== 'function') return alert('Karakter sistemi hazır değil.');
+  setChars(p=>[f,...p]);
+  setF({name:'',owner:'',story:''});
+ }
+ return <div className="inner"><Header setPage={setPage} openLogin={openLogin}/><main>
+  <Title k="KARAKTERLER" t="Karakterler" p="Oyuncular karakter ve hikaye ekleyebilir."/>
+  <Card className="form">
+   <Field value={f.name} onChange={v=>setF({...f,name:v})} placeholder="Karakter adı"/>
+   <Field value={f.owner} onChange={v=>setF({...f,owner:v})} placeholder="Oyuncu adı"/>
+   <TextArea value={f.story} onChange={v=>setF({...f,story:v})} placeholder="Hikaye"/>
+   <Button onClick={addChar}>Ekle</Button>
+  </Card>
+  <div className="cards">
+   {(chars||[]).map((c,i)=><Card className="mini" key={i}><Users/><h2>{c.name}</h2><p>{c.owner}</p><small>{c.story}</small></Card>)}
+  </div>
+ </main></div>
 }
 
 function GamePage({setPage,openLogin}) { const [s,setS]=useState(null); return <div className="inner"><Header setPage={setPage} openLogin={openLogin}/><main><Title k="MİNİ OYUN" t="Karakter Oyunu" p="Kader puanını belirle."/><Card className="game"><Gamepad2/><h2>{s??'?'}</h2><Button onClick={()=>setS(Math.ceil(Math.random()*100))}>Zar At</Button></Card></main></div> }
@@ -688,7 +711,7 @@ function App(){
  if(page==='wanted')return <AppShell theme={theme} setTheme={setTheme} musicOn={musicOn} setMusicOn={setMusicOn}><WantedPage setPage={setPage} openLogin={openLogin} wanted={wanted}/></AppShell>;
  if(page==='rules')return <AppShell theme={theme} setTheme={setTheme} musicOn={musicOn} setMusicOn={setMusicOn}><RulesPage setPage={setPage} openLogin={openLogin}/></AppShell>;
  if(page==='staff')return <AppShell theme={theme} setTheme={setTheme} musicOn={musicOn} setMusicOn={setMusicOn}><StaffPage setPage={setPage} openLogin={openLogin} staffMembers={staffMembers}/></AppShell>;
- if(page==='characters')return <AppShell theme={theme} setTheme={setTheme} musicOn={musicOn} setMusicOn={setMusicOn}><CharactersPage setPage={setPage} openLogin={openLogin} chars={chars}/></AppShell>;
+ if(page==='characters')return <AppShell theme={theme} setTheme={setTheme} musicOn={musicOn} setMusicOn={setMusicOn}><CharactersPage setPage={setPage} openLogin={openLogin} chars={chars} setChars={setChars}/></AppShell>;
  if(page==='game')return <AppShell theme={theme} setTheme={setTheme} musicOn={musicOn} setMusicOn={setMusicOn}><GamePage setPage={setPage} openLogin={openLogin}/></AppShell>;
  if(page==='market')return <AppShell theme={theme} setTheme={setTheme} musicOn={musicOn} setMusicOn={setMusicOn}><MarketPage setPage={setPage} openLogin={openLogin} donate={donate}/></AppShell>;
  if(page==='login')return <AppShell theme={theme} setTheme={setTheme} musicOn={musicOn} setMusicOn={setMusicOn}><LoginPage setPage={setPage} mode={mode} setMode={setMode} auth={auth} setAuth={setAuth} loginAdmin={loginAdmin} loginPlayer={loginPlayer} registerPlayer={registerPlayer}/></AppShell>;
