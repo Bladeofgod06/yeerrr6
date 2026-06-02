@@ -258,7 +258,7 @@ function HomePage({setPage,openLogin,announcements=[],wanted=[]}) {
    <div className="heroText"><img className="heroBigLogo" src={YER6_HERO_LOGO} alt="YER6"/><h1>Bir Şehrin<br/><em>Yeni Hikayesi Başlıyor!</em></h1><p>Gerçekçi rol ortamı, aktif sistemler ve profesyonel yönetim kadrosuyla benzersiz bir deneyime katıl.</p><div className="heroButtons"><Button onClick={()=>openLogin('register')}><UserPlus size={18}/> Hemen Katıl</Button><Button variant="ghost" onClick={()=>window.open('https://discord.gg/ysewESgQm','_blank')}>Discord'da Katıl</Button></div></div>
    <Card className="status"><div><b>Sunucu Durumu</b><span>Çevrimiçi</span></div><p>IP Adresi <b>connect.yer6rp.com</b></p><p>Oyuncular <b>182 / 500</b></p><p>Ping <b>21ms</b></p><Button className="full" onClick={()=>window.location.href='fivem://connect/185.34.101.48:30120'}>Sunucuya Katıl</Button></Card>
   </section>
-  <section className="galleryRow">{gallery.map((g,i)=><Card className="photoCard" key={i}><img src={`/images/${g}`}/><h2>{['Şehirden Kareler','Devlet Birimleri','Sokak Hayatı'][i]}</h2></Card>)}</section>
+  <section className="galleryRow">{gallery.map((g,i)=><Card className="photoCard" key={i}><img src={`/images/${g}`}/><h2>{['Şehirden Kareler','Sokak Hayatı','Devlet Birimleri'][i]}</h2></Card>)}</section>
 
   
   <section className="liveHomeStats">
