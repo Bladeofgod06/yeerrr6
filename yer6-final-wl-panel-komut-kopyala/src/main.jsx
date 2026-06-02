@@ -159,8 +159,8 @@ function Title({k,t,p}) { return <div className="title"><span>{k}</span><h1>{t}<
 
 
 function SplashScreen({theme}) {
- const [hide,setHide]=useState(false);
- useEffect(()=>{const t=setTimeout(()=>setHide(true),2600);return()=>clearTimeout(t)},[]);
+ const [hide,setHide]=useState(()=>sessionStorage.getItem('yer6_splash_seen')==='1');
+ useEffect(()=>{if(hide)return;const t=setTimeout(()=>{sessionStorage.setItem('yer6_splash_seen','1');setHide(true)},1800);return()=>clearTimeout(t)},[hide]);
  if(hide) return null;
  return <div className={`splashScreen theme-${theme}`}>
   <div className="splashInner">
@@ -498,13 +498,25 @@ function PlayerPanel({player,setPlayer,setPage,tickets,setTickets,apps,setApps,p
 }
 
 
+class ErrorBoundary extends React.Component {
+ constructor(props){super(props);this.state={hasError:false,error:null};}
+ static getDerivedStateFromError(error){return {hasError:true,error};}
+ componentDidCatch(error,info){console.error('YER6 panel hatası:',error,info);}
+ render(){
+  if(this.state.hasError){
+   return <div className="crashBox"><Card className="panel"><h1>Panel yüklenirken hata oluştu</h1><p>{String(this.state.error?.message||this.state.error)}</p><Button onClick={()=>{localStorage.removeItem('yer6_dashboard_widgets');location.href='/'}}>Ana Sayfaya Dön</Button></Card></div>
+  }
+  return this.props.children;
+ }
+}
+
 function AppShell({children,theme,setTheme,musicOn,setMusicOn}) {
  return <>
   <SplashScreen theme={theme}/>
   <BackgroundMusic musicOn={musicOn}/>
   <ThemeMusicControls theme={theme} setTheme={setTheme} musicOn={musicOn} setMusicOn={setMusicOn}/>
   <AiAssistant/>
-  {children}
+  <ErrorBoundary>{children}</ErrorBoundary>
  </>
 }
 
