@@ -291,15 +291,15 @@ function PlayerPanel({player,setPlayer,setPage,tickets,setTickets,apps,setApps,p
 
 function AdminPanel({admin,setAdmin,setPage,admins,setAdmins,players,setPlayers,donate,setDonate,staffRanks,setStaffRanks,staffMembers,setStaffMembers,tickets,setTickets,apps,setApps,punishments,setPunishments,logs,setLogs}) {
  const [active,setActive]=useState('Dashboard');
- const [newAdmin,setNewAdmin]=useState({username:'',discordId:'',password:'',role:'Staff 1'});
- const [newStaff,setNewStaff]=useState({name:'',discordId:'',rank:'Staff 1',duty:'',status:'Aktif'});
+ const [newAdmin,setNewAdmin]=useState({username:'',discordId:'',password:'',role:'Trial Admin'});
+ const [newStaff,setNewStaff]=useState({name:'',discordId:'',rank:'Trial Admin',duty:'',status:'Aktif'});
  const [editDonate,setEditDonate]=useState(null);
  const [punish,setPunish]=useState({targetType:'Oyuncu',targetId:'',targetName:'',rule:'',penalty:'',proof:'',note:'',removeWL:true});
  const rank=staffRanks.find(r=>r.rank===newAdmin.role)||staffRanks[0];
  const menu=['Dashboard','Oyuncular','Yetkililer','Yönetim Kadrosu','Destekler','Başvurular','Ceza Ver','WL Takip','Ceza Kayıtları','Kurallar','Donate Market','Loglar'];
 
- function addAdmin(){if(!newAdmin.username||!newAdmin.discordId||!newAdmin.password)return alert('Tüm alanları doldur');setAdmins(p=>[{...newAdmin,role:rank.rank,level:getStaffLevel(rank.rank)},...p]);setNewAdmin({username:'',discordId:'',password:'',role:'Staff 1'})}
- function addStaff(){if(!newStaff.name||!newStaff.discordId||!newStaff.rank)return alert('Yetkili adı, Discord ID ve rank gerekli.');setStaffMembers(p=>[{...newStaff, level:getStaffLevel(newStaff.rank)},...p]);setNewStaff({name:'',discordId:'',rank:'Staff 1',duty:'',status:'Aktif'});setLogs(p=>[now()+' - yönetim kadrosuna yetkili eklendi: '+newStaff.name,...p])}
+ function addAdmin(){if(!newAdmin.username||!newAdmin.discordId||!newAdmin.password)return alert('Tüm alanları doldur');setAdmins(p=>[{...newAdmin,role:rank.rank,level:getStaffLevel(rank.rank)},...p]);setNewAdmin({username:'',discordId:'',password:'',role:'Trial Admin'})}
+ function addStaff(){if(!newStaff.name||!newStaff.discordId||!newStaff.rank)return alert('Yetkili adı, Discord ID ve rank gerekli.');setStaffMembers(p=>[{...newStaff, level:getStaffLevel(newStaff.rank)},...p]);setNewStaff({name:'',discordId:'',rank:'Trial Admin',duty:'',status:'Aktif'});setLogs(p=>[now()+' - yönetim kadrosuna yetkili eklendi: '+newStaff.name,...p])}
  function closeTicket(id){setTickets(p=>p.map(t=>t.id===id?{...t,state:'Kapalı'}:t));setLogs(p=>[now()+' - destek kapatıldı: '+id,...p]);sendDiscordLog('Destek Kapatıldı',id+' kapatıldı.')}
  function assignTicket(id){setTickets(p=>p.map(t=>t.id===id?{...t,state:'İncelemede',assigned:admin.username}:t));setLogs(p=>[now()+' - destek üstlenildi: '+id,...p])}
  function appResult(i,result){setApps(p=>p.map((a,idx)=>idx===i?{...a,status:result}:a));setLogs(p=>[now()+' - başvuru '+result,...p]);sendDiscordLog('Yetkili Başvurusu '+result,(apps[i]?.username||'Oyuncu')+' başvurusu '+result)}
@@ -347,16 +347,23 @@ function AdminPanel({admin,setAdmin,setPage,admins,setAdmins,players,setPlayers,
 
 function App(){
  const [page,setPage]=useState('home'); const [mode,setMode]=useState('admin'); const [auth,setAuth]=useState({username:'',discordId:'',password:'',steam:''});
- const [admins,setAdmins]=useState(()=>JSON.parse(localStorage.getItem('yer6_admins_v10')||'null')||starterAdmins);
+ const [admins,setAdmins]=useState(()=>JSON.parse(localStorage.getItem('yer6_admins_v11')||'null')||starterAdmins);
  const [players,setPlayers]=useState(()=>JSON.parse(localStorage.getItem('yer6_players_v10')||'null')||[]);
  const [donate,setDonate]=useState(()=>JSON.parse(localStorage.getItem('yer6_donate_v10')||'null')||donateDefault);
- const [staffRanks,setStaffRanks]=useState(()=>JSON.parse(localStorage.getItem('yer6_ranks_v10')||'null')||staffRanksDefault);
- const [staffMembers,setStaffMembers]=useState(()=>JSON.parse(localStorage.getItem('yer6_staff_members_v10')||'null')||staffMembersDefault);
+ const [staffRanks,setStaffRanks]=useState(()=>JSON.parse(localStorage.getItem('yer6_ranks_v11')||'null')||staffRanksDefault);
+ const [staffMembers,setStaffMembers]=useState(()=>JSON.parse(localStorage.getItem('yer6_staff_members_v11')||'null')||staffMembersDefault);
  const [tickets,setTickets]=useState(()=>JSON.parse(localStorage.getItem('yer6_tickets_v10')||'null')||[]);
  const [apps,setApps]=useState(()=>JSON.parse(localStorage.getItem('yer6_apps_v10')||'null')||[]);
  const [punishments,setPunishments]=useState(()=>JSON.parse(localStorage.getItem('yer6_punishments_v10')||'null')||[]);
  const [logs,setLogs]=useState(['Sistem hazır.']); const [admin,setAdmin]=useState(null); const [player,setPlayer]=useState(null);
- useEffect(()=>localStorage.setItem('yer6_admins_v10',JSON.stringify(admins)),[admins]); useEffect(()=>localStorage.setItem('yer6_players_v10',JSON.stringify(players)),[players]); useEffect(()=>localStorage.setItem('yer6_donate_v10',JSON.stringify(donate)),[donate]); useEffect(()=>localStorage.setItem('yer6_ranks_v10',JSON.stringify(staffRanks)),[staffRanks]); useEffect(()=>localStorage.setItem('yer6_staff_members_v10',JSON.stringify(staffMembers)),[staffMembers]); useEffect(()=>localStorage.setItem('yer6_tickets_v10',JSON.stringify(tickets)),[tickets]); useEffect(()=>localStorage.setItem('yer6_apps_v10',JSON.stringify(apps)),[apps]); useEffect(()=>localStorage.setItem('yer6_punishments_v10',JSON.stringify(punishments)),[punishments]);
+
+ useEffect(()=>{
+  setStaffRanks(staffRanksDefault);
+  setAdmins(prev=>prev.map(a=>({...a, level:getStaffLevel(a.role)})));
+  setStaffMembers(prev=>prev.map(s=>({...s, level:getStaffLevel(s.rank)})));
+ },[]);
+
+ useEffect(()=>localStorage.setItem('yer6_admins_v11',JSON.stringify(admins)),[admins]); useEffect(()=>localStorage.setItem('yer6_players_v10',JSON.stringify(players)),[players]); useEffect(()=>localStorage.setItem('yer6_donate_v10',JSON.stringify(donate)),[donate]); useEffect(()=>localStorage.setItem('yer6_ranks_v11',JSON.stringify(staffRanks)),[staffRanks]); useEffect(()=>localStorage.setItem('yer6_staff_members_v11',JSON.stringify(staffMembers)),[staffMembers]); useEffect(()=>localStorage.setItem('yer6_tickets_v10',JSON.stringify(tickets)),[tickets]); useEffect(()=>localStorage.setItem('yer6_apps_v10',JSON.stringify(apps)),[apps]); useEffect(()=>localStorage.setItem('yer6_punishments_v10',JSON.stringify(punishments)),[punishments]);
 
  function openLogin(m){setMode(m);setPage('login');setAuth({username:'',discordId:'',password:'',steam:''})}
  function loginAdmin(){const a=admins.find(x=>String(x.discordId).trim()===String(auth.discordId).trim()&&String(x.password).trim()===String(auth.password).trim());if(!a)return alert('Kullanıcı adı veya şifre yanlış.');setAdmin(a);setPage('admin');setLogs(p=>[now()+' - admin girişi: '+a.username,...p])}
