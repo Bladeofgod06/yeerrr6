@@ -100,14 +100,19 @@ function Header({setPage,openLogin}) {
 function HomePage({setPage,openLogin}) {
  const [slide,setSlide]=useState(0);
  useEffect(()=>{const t=setInterval(()=>setSlide(s=>(s+1)%photos.length),3200);return()=>clearInterval(t)},[]);
- const gallery=['yer6-photo-5.jpg','yer6-photo-7.jpg','yer6-photo-4.jpg'];
+ const gallery=[
+  {img:'yer6-police-team.png', title:'YER6 Emniyet Ekibi'},
+  {img:'yer6-gang-life.png', title:'Çete Hayatı'},
+  {img:'yer6-street-life.png', title:'Sokak Hayatı'},
+  {img:'yer6-lux-life.png', title:'Lüks Yaşam'}
+ ];
  return <div className="site"><Header setPage={setPage} openLogin={openLogin}/>
   <section className="hero">
    {photos.map((p,i)=><img className={`heroImg ${i===slide?'active':''}`} src={`/images/${p}`} key={p}/>)}<div className="heroDark"></div>
    <div className="heroText"><img className="heroBigLogo" src="/images/yer6-g-logo.png" alt="YER6"/><span>YER6 ROLEPLAY</span><h1>Bir Şehrin<br/><em>Yeni Hikayesi Başlıyor!</em></h1><p>Gerçekçi rol ortamı, aktif sistemler ve profesyonel yönetim kadrosuyla benzersiz bir deneyime katıl.</p><div className="heroButtons"><Button onClick={()=>openLogin('register')}><UserPlus size={18}/> Hemen Katıl</Button><Button variant="ghost" onClick={()=>window.open('https://discord.gg/ysewESgQm','_blank')}>Discord'da Katıl</Button></div></div>
    <Card className="status"><div><b>Sunucu Durumu</b><span>Çevrimiçi</span></div><p>IP Adresi <b>connect.yer6rp.com</b></p><p>Oyuncular <b>182 / 500</b></p><p>Ping <b>21ms</b></p><Button className="full" onClick={()=>window.location.href='fivem://connect/185.34.101.48:30120'}>Sunucuya Katıl</Button></Card>
   </section>
-  <section className="galleryRow">{gallery.map((g,i)=><Card className="photoCard" key={i}><img src={`/images/${g}`}/><h2>{['Şehirden Kareler','Devlet Birimleri','Sokak Hayatı'][i]}</h2></Card>)}</section>
+  <section className="galleryRow">{gallery.map((g,i)=><Card className="photoCard" key={i}><img src={`/images/${g.img}`} alt={g.title}/><h2>{g.title}</h2></Card>)}</section>
   <Footer setPage={setPage} openLogin={openLogin}/>
  </div>
 }

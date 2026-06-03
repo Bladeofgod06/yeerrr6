@@ -49,9 +49,10 @@
 
 
 /* =========================================================
-   YER6 LOGO + ANA HERO FIX
-   Kart görsellerine dokunulmadı.
-   Üst logo ve hero içi G logosu geri eklendi.
+   YER6 LOGO + HERO + ANA SAYFA KART FIX
+   1. görsel ana hero olarak ayarlandı.
+   Eski logolar geri getirildi.
+   Diğer görseller ana sayfa kartlarına eklendi.
    ========================================================= */
 
 .logo.logoImageBtn{
@@ -78,7 +79,7 @@
 }
 
 .heroBigLogo{
-  width:330px!important;
+  width:340px!important;
   max-width:90%!important;
   height:auto!important;
   display:block!important;
@@ -100,8 +101,36 @@
 
 .heroDark{
   background:
-    linear-gradient(90deg,rgba(0,0,0,.88),rgba(0,0,0,.28),rgba(0,0,0,.86)),
-    linear-gradient(180deg,rgba(0,0,0,.08),#05070a 96%)!important;
+    linear-gradient(90deg,rgba(0,0,0,.88),rgba(0,0,0,.30),rgba(0,0,0,.86)),
+    linear-gradient(180deg,rgba(0,0,0,.05),#05070a 96%)!important;
+}
+
+.galleryRow{
+  grid-template-columns:repeat(4,1fr)!important;
+  gap:18px!important;
+}
+
+.photoCard{
+  height:360px!important;
+  border-color:rgba(255,0,0,.32)!important;
+}
+
+.photoCard:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,transparent 45%,rgba(0,0,0,.86));
+  pointer-events:none;
+}
+
+.photoCard h2{
+  z-index:2!important;
+  color:white!important;
+  text-shadow:0 0 14px rgba(0,0,0,.95)!important;
+}
+
+@media(max-width:1200px){
+  .galleryRow{grid-template-columns:repeat(2,1fr)!important}
 }
 
 @media(max-width:1000px){
@@ -116,4 +145,6 @@
   .heroBigLogo{
     width:230px!important;
   }
+  .galleryRow{grid-template-columns:1fr!important}
+  .photoCard{height:330px!important}
 }
