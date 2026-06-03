@@ -47,13 +47,19 @@
   margin-top:10px;
 }
 
-/* === YER6 görsel tasarım FIX: büyük hero logo + güçlü header === */
+
+/* =========================================================
+   YER6 LOGO + ANA HERO FIX
+   Kart görsellerine dokunulmadı.
+   Üst logo ve hero içi G logosu geri eklendi.
+   ========================================================= */
+
 .logo.logoImageBtn{
   font-size:0!important;
   letter-spacing:0!important;
   color:transparent!important;
-  width:185px!important;
-  height:68px!important;
+  width:190px!important;
+  height:74px!important;
   padding:0!important;
   display:flex!important;
   align-items:center!important;
@@ -62,497 +68,52 @@
   border:0!important;
   overflow:visible!important;
 }
+
 .logo.logoImageBtn img{
-  width:170px!important;
-  max-height:66px!important;
+  width:176px!important;
+  max-height:70px!important;
   object-fit:contain!important;
   display:block!important;
-  filter:drop-shadow(0 0 16px rgba(240,20,39,.18))!important;
+  filter:drop-shadow(0 0 12px rgba(255,0,0,.34))!important;
 }
-.header{
-  height:96px!important;
-  padding:0 42px!important;
-  background:rgba(2,3,6,.92)!important;
+
+.heroBigLogo{
+  width:330px!important;
+  max-width:90%!important;
+  height:auto!important;
+  display:block!important;
+  object-fit:contain!important;
+  margin:0 0 22px 0!important;
+  filter:
+    drop-shadow(0 0 18px rgba(255,0,0,.42))
+    drop-shadow(0 0 42px rgba(255,0,0,.18))!important;
 }
-.header nav{
-  gap:34px!important;
-}
-.header nav button{
-  font-size:13px!important;
-}
-.hero{
-  height:860px!important;
-}
-.heroDark{
-  background:
-    radial-gradient(circle at 16% 32%, rgba(240,20,39,.18), transparent 22%),
-    radial-gradient(circle at 72% 34%, rgba(240,20,39,.12), transparent 24%),
-    linear-gradient(90deg,rgba(0,0,0,.95),rgba(0,0,0,.38),rgba(0,0,0,.88)),
-    linear-gradient(180deg,rgba(0,0,0,.08),#05070a 96%)!important;
-}
-.heroText{
-  left:72px!important;
-  top:165px!important;
-  width:min(620px,90vw)!important;
-}
-.heroText>span,
-.heroMiniLogo{
+
+.heroText>span{
   display:none!important;
 }
-.heroBigLogo{
-  width:420px!important;
-  max-width:92%!important;
-  height:auto!important;
-  object-fit:contain!important;
-  display:block!important;
-  margin:0 0 24px 0!important;
-  filter:
-    drop-shadow(0 0 18px rgba(240,20,39,.32))
-    drop-shadow(0 0 45px rgba(240,20,39,.14))!important;
-}
-.heroText h1{
-  font-size:64px!important;
-  line-height:1.05!important;
-  margin:0 0 22px!important;
-  letter-spacing:-1px!important;
-}
-.heroText h1 em{
-  color:#ff1f31!important;
-}
-.heroText p{
-  max-width:560px!important;
-  font-size:19px!important;
-}
-.status{
-  top:230px!important;
-  right:72px!important;
-  width:380px!important;
-  padding:30px!important;
-}
-.galleryRow{
-  margin-top:-35px!important;
-  position:relative!important;
-  z-index:4!important;
-}
-footer .logoImageBtn,
-.adminLayout aside .logoImageBtn{
-  width:190px!important;
-  height:80px!important;
-}
-footer .logoImageBtn img,
-.adminLayout aside .logoImageBtn img{
-  width:185px!important;
-  max-height:78px!important;
-}
-@media(max-width:1000px){
-  .header{height:82px!important;padding:0 18px!important}
-  .logo.logoImageBtn{width:140px!important;height:58px!important}
-  .logo.logoImageBtn img{width:135px!important}
-  .hero{height:820px!important}
-  .heroText{left:22px!important;top:130px!important}
-  .heroBigLogo{width:260px!important}
-  .heroText h1{font-size:42px!important}
-  .status{top:500px!important;right:auto!important;width:auto!important}
-}
 
-/* === EXTRA: Açılış animasyonu, tema, müzik, AI, sinematik === */
-:root{--accent:#ff1f31;--accent2:#a80714;--bg:#05070a}
-body.theme-blue{--accent:#38bdf8;--accent2:#075985;--bg:#020817}
-body.theme-black{--accent:#e5e7eb;--accent2:#52525b;--bg:#030303}
-body.theme-red{--accent:#ff1f31;--accent2:#a80714;--bg:#05070a}
-body{background:var(--bg)!important}
-.btn{background:linear-gradient(135deg,var(--accent),var(--accent2))!important}
-.header{border-bottom-color:color-mix(in srgb,var(--accent) 35%,transparent)!important}
-.header nav button:hover,.heroText h1 em,.commandPreview b,.rankCard b,.mini svg,.stat svg,.title span{color:var(--accent)!important}
-.badge{border-color:color-mix(in srgb,var(--accent) 25%,transparent)}
-.splashScreen{position:fixed;inset:0;background:radial-gradient(circle at center,color-mix(in srgb,var(--accent) 18%,transparent),#020305 55%);z-index:99999;display:grid;place-items:center;animation:splashOut .55s ease 2.15s forwards}
-.splashInner{text-align:center;animation:splashPop .9s ease}
-.splashInner .logoImageBtn{justify-content:center!important;margin:auto;width:260px!important;height:110px!important}
-.splashInner .logoImageBtn img{width:250px!important;max-height:105px!important}
-.splashInner h1{font-size:34px;letter-spacing:5px;margin:18px 0 6px}
-.splashInner p{color:#aaa}
-.loadingBar{width:310px;height:8px;background:rgba(255,255,255,.1);border-radius:999px;overflow:hidden;margin:22px auto}
-.loadingBar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),#fff);animation:loadBar 2s ease forwards}
-@keyframes loadBar{to{width:100%}}@keyframes splashPop{from{transform:scale(.85);opacity:0}to{transform:scale(1);opacity:1}}@keyframes splashOut{to{opacity:0;visibility:hidden}}
-.floatingControls{position:fixed;right:18px;bottom:20px;z-index:90;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;max-width:520px}
-.floatingControls button,.aiToggle{background:rgba(5,7,10,.82);color:white;border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:999px;padding:11px 14px;font-weight:900;display:flex;gap:7px;align-items:center;cursor:pointer;backdrop-filter:blur(12px);transition:.25s}
-.floatingControls button:hover,.floatingControls button.active,.aiToggle:hover{transform:translateY(-5px);background:linear-gradient(135deg,var(--accent),var(--accent2))}
-.aiBox{position:fixed;left:18px;bottom:20px;z-index:91}
-.aiPanel{width:min(390px,92vw);height:500px;background:rgba(7,10,14,.94);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:18px;box-shadow:0 30px 90px rgba(0,0,0,.45);overflow:hidden;display:flex;flex-direction:column}
-.aiHead{height:56px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:space-between;padding:0 16px}.aiHead b{display:flex;gap:8px;align-items:center}.aiHead button{background:transparent;border:0;color:white;cursor:pointer}
-.aiMessages{flex:1;overflow:auto;padding:16px;display:flex;flex-direction:column;gap:10px}.aiMessages p{margin:0;padding:11px 13px;border-radius:12px;line-height:1.45}.aiMessages .bot{background:rgba(255,255,255,.08);align-self:flex-start}.aiMessages .user{background:linear-gradient(135deg,var(--accent),var(--accent2));align-self:flex-end}
-.aiInput{display:flex;gap:8px;padding:12px;border-top:1px solid rgba(255,255,255,.08)}.aiInput input{flex:1;background:#090c10;border:1px solid rgba(255,255,255,.12);border-radius:10px;color:white;padding:12px;outline:0}.aiInput button{width:44px;border:0;border-radius:10px;background:var(--accent);color:white;cursor:pointer}
-.cinematicTag{position:absolute;left:72px;top:128px;z-index:3;color:#ddd;background:rgba(0,0,0,.42);border:1px solid color-mix(in srgb,var(--accent) 25%,transparent);border-radius:999px;padding:10px 14px;display:flex;align-items:center;gap:8px;font-weight:900;backdrop-filter:blur(12px)}
-.hero:after{content:'';position:absolute;inset:0;background:linear-gradient(115deg,transparent 0 25%,rgba(255,255,255,.035) 26%,transparent 32%);pointer-events:none;animation:cinemaSweep 5s infinite}
-@keyframes cinemaSweep{0%{transform:translateX(-70%)}70%,100%{transform:translateX(80%)}}
-.dashboardCustom{display:grid;gap:16px}.widgetSettings h2{display:flex;align-items:center;gap:8px}.widgetToggles{display:flex;gap:10px;flex-wrap:wrap}.widgetToggles button{background:#090c10;border:1px solid rgba(255,255,255,.12);color:white;border-radius:999px;padding:11px 14px;font-weight:900;display:flex;align-items:center;gap:7px;cursor:pointer}
-@media(max-width:1000px){.floatingControls{right:10px;left:10px;bottom:10px;justify-content:center}.floatingControls button{font-size:12px;padding:9px}.aiBox{left:10px;bottom:80px}.cinematicTag{left:22px;top:112px;font-size:12px}.heroText{top:160px!important}}
-
-/* === Duyuru merkezi + Arananlar sistemi === */
-.homeInfoSections{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:0 45px 45px;margin-top:-10px;position:relative;z-index:4}
-.homeInfoCard{padding:26px;min-height:220px}
-.homeInfoCard svg{color:var(--accent,#ff1f31);width:36px;height:36px;margin-bottom:12px}
-.homeInfoCard h2{margin:0 0 12px}
-.homeInfoCard p{color:#bbb;line-height:1.55}
-.noticeGrid,.wantedGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.noticeCard,.wantedCard{padding:26px;position:relative;overflow:hidden}
-.noticeCard:before,.wantedCard:before{content:'';position:absolute;inset:0;background:radial-gradient(circle at top right,color-mix(in srgb,var(--accent,#ff1f31) 18%,transparent),transparent 42%);pointer-events:none}
-.noticeTop{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-.noticeCard h2,.wantedCard h2{display:flex;align-items:center;gap:8px;margin:10px 0}
-.noticeCard p,.wantedCard p{color:#ccc;line-height:1.55}
-.wantedCard{border-color:rgba(255,31,49,.34)!important}
-.wantedStamp{position:absolute;right:-42px;top:22px;transform:rotate(35deg);background:linear-gradient(135deg,#ff1f31,#7f0710);padding:8px 54px;font-weight:1000;letter-spacing:2px}
-.wantedMeta{margin-top:16px;color:#777;font-size:12px}
-.panel h2 svg{vertical-align:middle;color:var(--accent,#ff1f31)}
-@media(max-width:1000px){.homeInfoSections,.noticeGrid,.wantedGrid{grid-template-columns:1fr;padding-left:20px;padding-right:20px}.homeInfoSections{margin-top:20px}}
-
-/* === Gerçek ticket + rozet + canlı istatistik === */
-.ticketAdmin,.ticketThread{border:1px solid rgba(255,255,255,.08);border-radius:14px;background:rgba(0,0,0,.22);padding:12px;margin-bottom:14px}
-.ticketMessages{display:flex;flex-direction:column;gap:8px;padding:8px 4px}
-.ticketMessages p{margin:0;padding:11px 13px;border-radius:12px;line-height:1.45}
-.ticketMessages p.user{background:rgba(255,255,255,.08);align-self:flex-start}
-.ticketMessages p.staff{background:linear-gradient(135deg,var(--accent,#ff1f31),var(--accent2,#a80714));align-self:flex-end}
-.ticketMessages small{opacity:.75}
-.ticketReply{display:grid;grid-template-columns:1fr auto auto;gap:8px;margin-top:10px}
-.ticketReply input{background:#090c10;border:1px solid rgba(255,255,255,.12);color:white;border-radius:10px;padding:12px;outline:0}
-.badgeCatalog{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0 20px}
-.profileBadge{display:inline-flex;align-items:center;gap:7px;border-radius:999px;padding:10px 14px;font-weight:1000;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.06)}
-.profileBadge.gold{background:rgba(251,191,36,.14);color:#fde68a}.profileBadge.red{background:rgba(239,68,68,.14);color:#fecaca}.profileBadge.blue{background:rgba(59,130,246,.14);color:#bfdbfe}.profileBadge.green{background:rgba(34,197,94,.14);color:#bbf7d0}
-.weekPreview{padding:14px;display:flex;align-items:center;gap:10px;color:#fde68a}
-.liveStatsGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.liveStatsGrid div,.liveHomeStats .card{background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:20px;text-align:center}
-.liveStatsGrid b,.liveHomeStats b{display:block;font-size:34px;color:var(--accent,#ff1f31);margin-bottom:6px}
-.liveStatsGrid span,.liveHomeStats span{color:#aaa;font-weight:900;text-transform:uppercase;font-size:12px}
-.liveHomeStats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:0 45px 24px;position:relative;z-index:4;margin-top:-60px}
-.liveHomeStats svg{color:var(--accent,#ff1f31);width:32px;height:32px;margin-bottom:8px}
-@media(max-width:1000px){.ticketReply,.liveStatsGrid,.liveHomeStats{grid-template-columns:1fr}.liveHomeStats{padding:20px;margin-top:10px}}
-
-/* Siyah ekran hata koruması */
-.crashBox{min-height:100vh;display:grid;place-items:center;background:#05070a;padding:30px}
-.crashBox .panel{max-width:760px;width:100%;text-align:center}
-.crashBox h1{color:#ff1f31}
-
-/* Yetkili yönetimi düzeltmesi */
-.miniSelect{
-  width:220px!important;
-  margin-bottom:0!important;
-  padding:11px!important;
-}
-.actions .field{
-  margin-bottom:0!important;
-}
-
-/* Son düzen: sinematik etiketi kaldırıldı */
-.cinematicTag{display:none!important}
-
-/* kesin gizleme */
-.cinematicTag{display:none!important}
-
-
-/* =========================================================
-   YER6 FOUNDER RED + BLACK THEME
-   Tam kırmızı-siyah tema override
-   ========================================================= */
-
-:root{
-  --accent:#ff0000 !important;
-  --accent2:#7a0000 !important;
-  --bg:#000000 !important;
-  --card-bg:#080808 !important;
-  --panel-bg:#0b0b0b !important;
-  --red-border:rgba(255,0,0,.42) !important;
-  --red-soft:rgba(255,0,0,.18) !important;
-  --red-glow:rgba(255,0,0,.32) !important;
-}
-
-html,
-body,
-#root{
-  background:#000000 !important;
-  color:#ffffff !important;
-}
-
-/* Header */
 .header{
-  background:rgba(0,0,0,.96) !important;
-  border-bottom:2px solid rgba(255,0,0,.45) !important;
-  box-shadow:0 0 30px rgba(255,0,0,.14) !important;
-}
-
-.header nav button{
-  color:#ffffff !important;
-}
-
-.header nav button:hover{
-  color:#ff0000 !important;
-  text-shadow:0 0 14px rgba(255,0,0,.55) !important;
-}
-
-/* Logo glow */
-.logo img,
-.logo.logoImageBtn img,
-.heroBigLogo{
-  filter:
-    drop-shadow(0 0 12px rgba(255,0,0,.50))
-    drop-shadow(0 0 34px rgba(255,0,0,.28)) !important;
-}
-
-/* Ana arka planlar */
-.adminLayout,
-.inner,
-.loginPage,
-.heroDark{
-  background-color:#000000 !important;
+  background:rgba(0,0,0,.94)!important;
+  border-bottom:1px solid rgba(255,0,0,.38)!important;
 }
 
 .heroDark{
   background:
-    radial-gradient(circle at 18% 28%, rgba(255,0,0,.22), transparent 24%),
-    radial-gradient(circle at 78% 35%, rgba(125,0,0,.18), transparent 28%),
-    linear-gradient(90deg,rgba(0,0,0,.96),rgba(0,0,0,.45),rgba(0,0,0,.92)),
-    linear-gradient(180deg,rgba(0,0,0,.08),#000 96%) !important;
+    linear-gradient(90deg,rgba(0,0,0,.88),rgba(0,0,0,.28),rgba(0,0,0,.86)),
+    linear-gradient(180deg,rgba(0,0,0,.08),#05070a 96%)!important;
 }
 
-/* Kartlar / paneller */
-.card,
-.panel,
-.rankCard,
-.mini,
-.form,
-.status,
-.photoCard,
-.noticeCard,
-.wantedCard,
-.staffCard,
-.footPanel,
-.loginCard,
-.modalCard,
-.stat{
-  background:rgba(8,8,8,.92) !important;
-  border:1px solid rgba(255,0,0,.34) !important;
-  box-shadow:
-    0 0 22px rgba(255,0,0,.12),
-    0 25px 70px rgba(0,0,0,.48) !important;
-}
-
-.card:hover,
-.panel:hover,
-.rankCard:hover,
-.mini:hover,
-.noticeCard:hover,
-.wantedCard:hover,
-.staffCard:hover,
-.stat:hover{
-  border-color:rgba(255,0,0,.65) !important;
-  box-shadow:
-    0 0 38px rgba(255,0,0,.22),
-    0 30px 80px rgba(0,0,0,.55) !important;
-}
-
-/* Butonlar */
-.btn{
-  background:linear-gradient(135deg,#ff0000,#7a0000) !important;
-  color:#ffffff !important;
-  border:1px solid rgba(255,0,0,.35) !important;
-}
-
-.btn:hover{
-  box-shadow:0 0 42px rgba(255,0,0,.42) !important;
-}
-
-.btn.ghost{
-  background:rgba(0,0,0,.55) !important;
-  border:1px solid rgba(255,0,0,.32) !important;
-}
-
-/* Yazı vurguları */
-.heroText h1 em,
-.heroText span,
-.title span,
-.title h1,
-.rankCard b,
-.mini svg,
-.stat svg,
-.game svg,
-.commandPreview b,
-.noticeCard svg,
-.wantedCard svg,
-.homeInfoCard svg,
-.panel h2 svg{
-  color:#ff0000 !important;
-}
-
-/* Formlar */
-.field,
-.textarea,
-.search,
-.ticketReply input,
-.aiInput input{
-  background:#080808 !important;
-  color:#ffffff !important;
-  border:1px solid rgba(255,0,0,.32) !important;
-}
-
-.field:focus,
-.textarea:focus,
-.search:focus-within,
-.ticketReply input:focus,
-.aiInput input:focus{
-  border-color:rgba(255,0,0,.75) !important;
-  box-shadow:0 0 18px rgba(255,0,0,.18) !important;
-}
-
-.field option{
-  background:#080808 !important;
-  color:white !important;
-}
-
-/* Admin panel */
-.adminLayout{
-  background:#000000 !important;
-}
-
-.adminLayout aside{
-  background:#050505 !important;
-  border-right:2px solid rgba(255,0,0,.35) !important;
-  box-shadow:10px 0 35px rgba(255,0,0,.08) !important;
-}
-
-.adminLayout aside button:not(.logo):not(.btn){
-  color:#dddddd !important;
-}
-
-.adminLayout aside button.active,
-.adminLayout aside button:hover:not(.logo):not(.btn){
-  background:linear-gradient(135deg,#ff0000,#7a0000) !important;
-  color:#ffffff !important;
-  box-shadow:0 0 22px rgba(255,0,0,.24) !important;
-}
-
-/* Satırlar */
-.row,
-.ticketAdmin,
-.ticketThread,
-.liveStatsGrid div,
-.liveHomeStats .card{
-  background:rgba(5,5,5,.82) !important;
-  border:1px solid rgba(255,0,0,.24) !important;
-}
-
-.row:hover,
-.ticketAdmin:hover,
-.ticketThread:hover{
-  border-color:rgba(255,0,0,.5) !important;
-}
-
-/* Badge renkleri kırmızı-siyah uyumlu */
-.badge{
-  background:#210000 !important;
-  color:#ffb3b3 !important;
-  border:1px solid rgba(255,0,0,.35) !important;
-}
-
-.badge.bad{
-  background:#7a0000 !important;
-  color:#ffffff !important;
-}
-
-.badge.good{
-  background:#250000 !important;
-  color:#ffb3b3 !important;
-}
-
-.badge.note{
-  background:#120000 !important;
-  color:#ffcccc !important;
-}
-
-/* Ticket mesajları */
-.ticketMessages p.staff,
-.aiMessages .user{
-  background:linear-gradient(135deg,#ff0000,#7a0000) !important;
-}
-
-/* Duyuru / Aranan */
-.wantedStamp{
-  background:linear-gradient(135deg,#ff0000,#650000) !important;
-  box-shadow:0 0 18px rgba(255,0,0,.32) !important;
-}
-
-.noticeCard:before,
-.wantedCard:before{
-  background:radial-gradient(circle at top right, rgba(255,0,0,.22), transparent 45%) !important;
-}
-
-/* Açılış ve floating kontroller */
-.splashScreen{
-  background:radial-gradient(circle at center, rgba(255,0,0,.18), #000 58%) !important;
-}
-
-.loadingBar span{
-  background:linear-gradient(90deg,#ff0000,#ffffff) !important;
-}
-
-.floatingControls button,
-.aiToggle{
-  background:rgba(0,0,0,.88) !important;
-  border:1px solid rgba(255,0,0,.42) !important;
-}
-
-.floatingControls button:hover,
-.floatingControls button.active,
-.aiToggle:hover{
-  background:linear-gradient(135deg,#ff0000,#7a0000) !important;
-}
-
-/* Footer */
-footer{
-  background:#000000 !important;
-  border-top:2px solid rgba(255,0,0,.25) !important;
-}
-
-/* Sinematik yazı kesin kapalı */
-.cinematicTag{
-  display:none !important;
-}
-
-
-/* =========================================================
-   YER6 BRIDGE HERO BACKGROUND
-   Bu görsel ana sayfaya yerleştirildi.
-   public/images/yer6-bridge-bg.png dosyasını kullanır.
-   ========================================================= */
-
-.hero{
-  background:
-    linear-gradient(90deg, rgba(0,0,0,.82), rgba(0,0,0,.34), rgba(0,0,0,.86)),
-    url('/images/yer6-bridge-bg.png') center center / cover no-repeat !important;
-}
-
-.heroImg{
-  opacity:0 !important;
-  display:none !important;
-}
-
-.heroDark{
-  background:
-    radial-gradient(circle at 16% 32%, rgba(255,0,0,.22), transparent 26%),
-    radial-gradient(circle at 78% 36%, rgba(255,0,0,.14), transparent 30%),
-    linear-gradient(90deg,rgba(0,0,0,.88),rgba(0,0,0,.32),rgba(0,0,0,.86)),
-    linear-gradient(180deg,rgba(0,0,0,.05),#000 96%) !important;
-}
-
-.loginPage{
-  background:
-    linear-gradient(rgba(0,0,0,.72),rgba(0,0,0,.86)),
-    url('/images/yer6-bridge-bg.png') center center / cover no-repeat !important;
-}
-
-.heroText{
-  text-shadow:0 0 18px rgba(0,0,0,.85) !important;
-}
-
-.status{
-  background:rgba(0,0,0,.74) !important;
-  backdrop-filter:blur(16px) !important;
+@media(max-width:1000px){
+  .logo.logoImageBtn{
+    width:145px!important;
+    height:62px!important;
+  }
+  .logo.logoImageBtn img{
+    width:138px!important;
+    max-height:58px!important;
+  }
+  .heroBigLogo{
+    width:230px!important;
+  }
 }
