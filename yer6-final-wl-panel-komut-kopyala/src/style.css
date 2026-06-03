@@ -515,3 +515,44 @@ footer{
 .cinematicTag{
   display:none !important;
 }
+
+
+/* =========================================================
+   YER6 BRIDGE HERO BACKGROUND
+   Bu görsel ana sayfaya yerleştirildi.
+   public/images/yer6-bridge-bg.png dosyasını kullanır.
+   ========================================================= */
+
+.hero{
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.82), rgba(0,0,0,.34), rgba(0,0,0,.86)),
+    url('/images/yer6-bridge-bg.png') center center / cover no-repeat !important;
+}
+
+.heroImg{
+  opacity:0 !important;
+  display:none !important;
+}
+
+.heroDark{
+  background:
+    radial-gradient(circle at 16% 32%, rgba(255,0,0,.22), transparent 26%),
+    radial-gradient(circle at 78% 36%, rgba(255,0,0,.14), transparent 30%),
+    linear-gradient(90deg,rgba(0,0,0,.88),rgba(0,0,0,.32),rgba(0,0,0,.86)),
+    linear-gradient(180deg,rgba(0,0,0,.05),#000 96%) !important;
+}
+
+.loginPage{
+  background:
+    linear-gradient(rgba(0,0,0,.72),rgba(0,0,0,.86)),
+    url('/images/yer6-bridge-bg.png') center center / cover no-repeat !important;
+}
+
+.heroText{
+  text-shadow:0 0 18px rgba(0,0,0,.85) !important;
+}
+
+.status{
+  background:rgba(0,0,0,.74) !important;
+  backdrop-filter:blur(16px) !important;
+}
