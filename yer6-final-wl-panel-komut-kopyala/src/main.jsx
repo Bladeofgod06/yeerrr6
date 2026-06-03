@@ -87,7 +87,10 @@ function Field({value,onChange,placeholder,type='text'}) { return <input classNa
 function TextArea({value,onChange,placeholder}) { return <textarea className="textarea" value={value} onChange={e=>onChange(e.target.value)} placeholder={placeholder}/> }
 function Badge({children,tone='warn'}) { return <span className={`badge ${tone}`}>{children}</span> }
 function Logo() {
- return <button className="logo logoImageBtn"><img src="/images/yer6-header-logo.png" alt="YER6 Roleplay"/></button>
+ return <button className="logo logoImageBtn">
+  <img src="/images/yer6-header-logo.png" alt="YER6 Roleplay"/>
+  <span className="logoFallback">YER<span>6</span><small>ROLEPLAY</small></span>
+ </button>
 }
 function Title({k,t,p}) { return <div className="title"><span>{k}</span><h1>{t}</h1><p>{p}</p></div> }
 

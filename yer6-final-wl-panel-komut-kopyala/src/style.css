@@ -49,10 +49,8 @@
 
 
 /* =========================================================
-   YER6 LOGO + HERO + ANA SAYFA KART FIX
-   1. görsel ana hero olarak ayarlandı.
-   Eski logolar geri getirildi.
-   Diğer görseller ana sayfa kartlarına eklendi.
+   YER6 FINAL IMAGE PATH FIX
+   Bunu GitHub'da public/images klasörüyle beraber yükle.
    ========================================================= */
 
 .logo.logoImageBtn{
@@ -76,6 +74,10 @@
   object-fit:contain!important;
   display:block!important;
   filter:drop-shadow(0 0 12px rgba(255,0,0,.34))!important;
+}
+
+.logoFallback{
+  display:none!important;
 }
 
 .heroBigLogo{
@@ -113,6 +115,13 @@
 .photoCard{
   height:360px!important;
   border-color:rgba(255,0,0,.32)!important;
+}
+
+.photoCard img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  display:block!important;
 }
 
 .photoCard:after{
